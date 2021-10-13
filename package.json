@@ -13,7 +13,7 @@
     "lerna": "^4.0.0"
   },
   "scripts": {
-    "watch": "lerna exec --parallel -- babel src -D lib"
+    "watch": "lerna exec --parallel -- yarn watch"
   },
   "dependencies": {
     "prettier": "^2.4.1"

@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+  ],
+  "settings": {
+    "prettier.documentSelectors": [
+      "*.js"
+    ],
+    "git.ignoreLimitWarning": true
+  }
+}

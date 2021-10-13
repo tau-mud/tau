@@ -2,6 +2,20 @@
   "name": "root",
   "private": true,
   "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.8",
+    "@babel/node": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "@babel/preset-react": "^7.14.5",
+    "@types/jest": "^27.0.2",
+    "@types/react": "^17.0.29",
+    "eslint": "^8.0.0",
     "lerna": "^4.0.0"
+  },
+  "scripts": {
+    "watch": "lerna exec --parallel -- babel src -D lib"
+  },
+  "dependencies": {
+    "prettier": "^2.4.1"
   }
 }

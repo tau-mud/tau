@@ -1,5 +1,5 @@
 {
-  "name": "@tau/portal",
+  "name": "@tau/world",
   "version": "0.0.0",
   "description": "> TODO: description",
   "author": "Jarod <therealfugu@gmail.com>",
@@ -32,8 +32,6 @@
     "standard": "^16.0.4"
   },
   "dependencies": {
-    "lodash": "^4.17.21",
-    "moleculer": "^0.14.17",
-    "uuid": "^8.3.2"
+    "moleculer": "^0.14.17"
   }
 }

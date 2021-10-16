@@ -78,6 +78,8 @@ export class Configuration implements BrokerOptions {
   config: IConfiguration;
   processName: string;
 
+  started: (ServiceBroker) => void;
+
   public constructor(processName: string, config: IConfiguration) {
     this.config = defaultsDeep(
       {
@@ -167,34 +169,34 @@ export class Configuration implements BrokerOptions {
     }),
       (this.middlewares = []);
     this.replCommands = null;
-  }
 
-  started(broker: ServiceBroker) {
-    // load the plugins
-    this.config.plugins.forEach((plugin) => {
-      plugin = defaultsDeep(
-        {
-          services: [],
-          portal: {
+    this.started = (broker: ServiceBroker) => {
+      broker.logger.info("loading TAU plugins");
+      this.config.plugins.forEach((plugin) => {
+        plugin = defaultsDeep(
+          {
             services: [],
+            portal: {
+              services: [],
+            },
+            world: {
+              services: [],
+            },
           },
-          world: {
-            services: [],
-          },
-        },
-        plugin
-      );
+          new plugin(this.config)
+        );
 
-      broker.logger.info(`loading plugin '${plugin.name}'`);
-      const globalServices = plugin.services;
-      const processServices = get(plugin, `${this.processName}.services`);
-      const services = globalServices.concat(processServices);
+        broker.logger.info(`loading plugin '${plugin.name}'`);
+        const globalServices = plugin.services;
+        const processServices = get(plugin, `${this.processName}.services`);
+        const services = globalServices.concat(processServices);
 
-      services.forEach((PluginService) => {
-        const service = new PluginService(broker, this.config);
-        broker.logger.info(`loading sesrvice '${service.name}'`);
-        broker.createService(service);
+        services.forEach((PluginService: any) => {
+          const service = new PluginService(this.config);
+          broker.logger.info(`loading sesrvice '${service.name}'`);
+          broker.createService(service);
+        });
       });
-    });
+    };
   }
 }

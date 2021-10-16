@@ -12,15 +12,12 @@ interface IWorldConfig {
 }
 
 export class WorldPlugin extends Plugin {
-  world: IWorldConfig;
-  constructor(config: IConfiguration) {
-    super(config);
-    this.name = "world";
-    this.world = {
-      controllers: {
-        StartController,
-      },
-    };
-    this.services = [SessionService];
-  }
+  public world: IWorldConfig = {
+    controllers: {
+      StartController,
+    },
+  };
+
+  name = "world";
+  services = [SessionService];
 }

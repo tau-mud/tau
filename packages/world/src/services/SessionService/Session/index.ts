@@ -26,14 +26,13 @@ export { SessionContext };
  * The Session represents an individual game session connected to the world. It is the
  * primary point in which all input and output to the player connection goes through.
  */
-@Service()
 export class Session extends TauService {
-  name: string;
   settings: IConnectionSettings;
   store: GenericObject;
 
   constructor(params: IConnectionSettings) {
     super();
+
     this.name = `tau.world.sessions.${params.uuid}`;
     this.settings = params;
     this.events[`tau.portal.connections.disconnected.${params.uuid}`] =

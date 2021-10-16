@@ -18,7 +18,6 @@ export interface IPutsParams {
 /**
  * Represents an individual connection to the Portal.
  */
-@Service()
 export class Connection extends TauService {
   readonly socket: Socket;
   readonly settings: IConnectionSettings;
@@ -28,6 +27,7 @@ export class Connection extends TauService {
     super();
     const uuid = uuidv4();
 
+    this.name = `tau.portal.connections.${uuid}`;
     this.store = {};
     this.socket = socket;
     this.settings = {

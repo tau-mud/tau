@@ -4,5 +4,10 @@ module.exports = {
   targets: {
     node: "current",
   },
-  plugins: ["@babel/plugin-proposal-export-default-from"],
+  plugins: ["@babel/plugin-proposal-export-default-from", [
+    "@babel/plugin-proposal-decorators",
+    {
+      decoratorsBeforeExport: true
+    }
+  ]],
 };

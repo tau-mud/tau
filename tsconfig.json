@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.build.json",
+
+  "compilerOptions": {
+    "baseUrl": "./packages",
+    "paths": {
+      "@tau/core": ["core/src"],
+      "@tau/portal": ["portal/src"],
+      "@tau/world": ["world/src"]
+    }
+  }
+}

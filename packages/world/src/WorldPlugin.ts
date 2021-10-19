@@ -1,23 +1,33 @@
-import { SessionService } from "./services/SessionService";
-import { StartController } from "./controllers";
+import {
+  IPlugin,
+  IConfiguration,
+  IWorldOptions as ICoreWorldOptions,
+} from "@tau/core";
 
-import { Plugin, IConfiguration } from "@tau/core";
+import { TController } from "./Controller";
+import { StartController } from "./controllers";
+import { SessionService } from "./services/SessionService";
 
 interface IControllerMap {
-  [key: string]: any;
+  [key: string]: TController;
 }
 
-interface IWorldConfig {
+export interface IWorldOptions extends ICoreWorldOptions {
   controllers: IControllerMap;
 }
 
-export class WorldPlugin extends Plugin {
-  public world: IWorldConfig = {
-    controllers: {
-      StartController,
+interface IWorldPlugin extends IPlugin {
+  world: IWorldOptions;
+}
+
+export function WorldPlugin(_config: IConfiguration): IWorldPlugin {
+  return {
+    name: "world",
+    world: {
+      services: [SessionService],
+      controllers: {
+        start: StartController,
+      },
     },
   };
-
-  name = "world";
-  services = [SessionService];
 }

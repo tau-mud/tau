@@ -1,16 +1,16 @@
-import { Session } from "./index";
+import { ISessionSchema } from "./index";
 
-export class SessionContext {
-  session: Session;
+export interface ISessionContext {
+  puts: (message: string) => Promise<any>;
+}
 
-  constructor(session: Session) {
-    this.session = session;
-  }
-
-  puts(message: string): Promise<any> {
-    return this.session.broker.call(
-      `tau.portal.connections.${this.session.settings.uuid}.puts`,
-      { message }
-    );
-  }
+export function SessionContext(session: ISessionSchema): ISessionContext {
+  return {
+    puts(message: string): Promise<any> {
+      return session.broker.call(
+        `tau.portal.connections.${session.settings.uuid}.puts`,
+        { message }
+      );
+    },
+  };
 }

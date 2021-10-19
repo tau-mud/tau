@@ -1,10 +1,7 @@
 import { Socket } from "net";
 
 import { v4 as uuidv4 } from "uuid";
-import { Service, Action } from "moleculer-decorators";
-import { Context, GenericObject, Service as MoleculerService } from "moleculer";
-
-import { TauService } from "@tau/core";
+import { Context, GenericObject, ServiceSchema } from "moleculer";
 
 export interface IConnectionSettings {
   uuid: string;
@@ -15,68 +12,67 @@ export interface IPutsParams {
   message: string;
 }
 
+export interface IConnectionSchema extends ServiceSchema {
+  store: GenericObject;
+  socket: Socket;
+  settings: IConnectionSettings;
+}
+
 /**
  * Represents an individual connection to the Portal.
  */
-export class Connection extends TauService {
-  readonly socket: Socket;
-  readonly settings: IConnectionSettings;
-  store: GenericObject;
+export function Connection(socket: Socket): IConnectionSchema {
+  const uuid = uuidv4();
 
-  constructor(socket: Socket) {
-    super();
-    const uuid = uuidv4();
-
-    this.name = `tau.portal.connections.${uuid}`;
-    this.store = {};
-    this.socket = socket;
-    this.settings = {
+  const schema = {
+    name: `tau.portal.connections.${uuid}`,
+    store: {},
+    settings: {
       uuid,
       remoteAddress: socket.remoteAddress,
-    };
+    },
+    events: {},
+    actions: {
+      getStore() {
+        return this.store;
+      },
+      setStore(ctx: Context<GenericObject>) {
+        this.store = ctx.params;
+      },
+      puts(ctx: Context<IPutsParams>) {
+        return socket.write(`${ctx.params.message}\r\n`);
+      },
+    },
+    methods: {
+      handleDisconnect() {
+        this.logger.info("disconnected");
+        this.broker.broadcast(
+          `tau.portal.connections.disconnected.${this.settings.uuid}`,
+          {
+            uuid: this.settings.uuid,
+          }
+        );
+        this.broker.destroyService(this);
+      },
+      notifySessionCreated() {
+        this.broker.broadcast("tau.portal.connections.created", {
+          uuid: this.settings.uuid,
+          remoteAddress: this.settings.remoteAddress,
+        });
+      },
+    },
+    created() {
+      socket.on("close", this.handleDisconnect);
 
-    this.events[`tau.world.sessions.store-updated.${uuid}`] = this.setStore;
-  }
+      this.store = {};
 
-  created() {
-    this.socket.on("close", this.handleDisconnect);
+      this.logger.info("creating session");
+      this.notifySessionCreated();
+    },
+  };
 
-    this.store = {};
+  schema.events[`tau.world.sessions.store-updated.${uuid}`] =
+    schema.actions.setStore;
 
-    this.logger.info("creating session");
-    this.notifySessionCreated();
-  }
-
-  @Action()
-  getStore() {
-    return this.store;
-  }
-
-  @Action()
-  setStore(ctx: Context<GenericObject>) {
-    this.store = ctx.params;
-  }
-
-  @Action()
-  puts(ctx: Context<IPutsParams>) {
-    return this.socket.write(`${ctx.params.message}\r\n`);
-  }
-
-  notifySessionCreated() {
-    this.broker.broadcast("tau.portal.connections.created", {
-      uuid: this.settings.uuid,
-      remoteAddress: this.settings.remoteAddress,
-    });
-  }
-
-  handleDisconnect() {
-    this.logger.info("disconnected");
-    this.broker.broadcast(
-      `tau.portal.connections.disconnected.${this.settings.uuid}`,
-      {
-        uuid: this.settings.uuid,
-      }
-    );
-    this.broker.destroyService(<MoleculerService>(<unknown>this));
-  }
+  return schema;
 }

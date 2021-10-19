@@ -1,8 +1,20 @@
-import { IConfiguration } from "./Configuration";
+import { GenericObject } from "moleculer";
 
-export abstract class Plugin {
-  public abstract name: string;
-  public abstract services: Array<any>;
+import { TService } from "./Service";
+import { IConfiguration } from "./Configure";
 
-  constructor(_config: IConfiguration) {}
+export type TPlugin = (configuration: IConfiguration) => IPlugin;
+
+export interface IWorldOptions {
+  services?: Array<TService>;
+  controllers?: GenericObject;
+}
+
+export interface IPlugin {
+  name: string;
+  services?: Array<TService>;
+  portal?: {
+    services?: Array<TService>;
+  };
+  world?: IWorldOptions;
 }

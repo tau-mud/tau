@@ -1,8 +1,13 @@
-import { Plugin, IConfiguration } from "@tau/core";
+import { IPlugin, IConfiguration } from "@tau/core";
 
 import { PortalService } from "./services/PortalService";
 
-export class PortalPlugin extends Plugin {
-  name = "core";
-  services = [PortalService];
+export function PortalPlugin(_config: IConfiguration): IPlugin {
+  return {
+    name: "core",
+    services: [],
+    portal: {
+      services: [PortalService],
+    },
+  };
 }

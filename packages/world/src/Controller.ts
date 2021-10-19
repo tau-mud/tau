@@ -1,13 +1,7 @@
-import { SessionContext } from "./services/SessionService";
+import { ISessionContext } from "./services/SessionService";
 
-export abstract class Controller {
-  abstract name: string;
-
-  session: SessionContext;
-
-  abstract start(): Promise<void>;
-
-  constructor(session: SessionContext) {
-    this.session = session;
-  }
+export interface IController {
+  start(): Promise<any>;
 }
+
+export type TController = (session: ISessionContext) => IController;

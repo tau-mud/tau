@@ -1,13 +1,13 @@
 import { IConfiguration } from "@tau/core";
 import { IConnectionSettings } from "@tau/portal";
-
-import { Service, Context } from "moleculer";
+import { Context, ServiceSchema } from "moleculer";
 
 import { Session } from "./Session";
+export { SessionContext, ISessionContext } from "./Session";
 
-export { SessionContext } from "./Session";
+interface ISessionsSchema extends ServiceSchema {}
 
-export function SessionService(_config: IConfiguration) {
+export function SessionService(_config: IConfiguration): ISessionsSchema {
   return {
     name: "tau.sessions",
     dependencies: ["tau.portal"],
@@ -18,7 +18,7 @@ export function SessionService(_config: IConfiguration) {
     },
     started() {
       this.broker.broadcast("tau.world.sessions.started");
-      this.broker
+      return this.broker
         .call("tau.portal.getConnections")
         .then((connections: Array<IConnectionSettings>) => {
           connections.forEach((conn) => {
@@ -29,7 +29,7 @@ export function SessionService(_config: IConfiguration) {
 
     createSession(conn: IConnectionSettings) {
       this.logger.info(`creating session for ${conn.uuid}`);
-      this.broker.createService(new Session(conn));
+      this.broker.createService(Session(conn));
     },
   };
 }

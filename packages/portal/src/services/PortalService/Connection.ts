@@ -14,7 +14,6 @@ export interface IPutsParams {
 
 export interface IConnectionSchema extends ServiceSchema {
   store: GenericObject;
-  socket: Socket;
   settings: IConnectionSettings;
 }
 
@@ -37,6 +36,7 @@ export function Connection(socket: Socket): IConnectionSchema {
         return this.store;
       },
       setStore(ctx: Context<GenericObject>) {
+        this.logger.debug("setting store to:", ctx.params);
         this.store = ctx.params;
       },
       puts(ctx: Context<IPutsParams>) {

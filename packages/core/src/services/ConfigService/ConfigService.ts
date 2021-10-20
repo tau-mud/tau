@@ -5,6 +5,7 @@ import { IConfiguration } from "../../Configure";
 
 interface IGetValueParams {
   key: string;
+  defaultValue: any;
 }
 
 interface IConfigServiceSchema extends ServiceSchema {
@@ -19,12 +20,18 @@ export function ConfigService(config: IConfiguration): IConfigServiceSchema {
   return {
     name: "tau.config",
     settings: config,
+    started() {
+      this.logger.debug("started with config", config);
+
+      return Promise.resolve();
+    },
     actions: {
       set(ctx: Context<IConfiguration>) {
         this.settings = ctx.params;
       },
       getValue(ctx: Context<IGetValueParams>) {
-        get(this.settings, ctx.params.key);
+        this.logger.debug(`getting value for key '${ctx.params.key}'`);
+        return get(this.settings, ctx.params.key) || ctx.params.defaultValue;
       },
     },
   };

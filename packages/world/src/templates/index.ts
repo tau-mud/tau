@@ -1,0 +1,1 @@
+export { MotdTemplate } from "./MotdTemplate";

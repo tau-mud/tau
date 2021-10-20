@@ -1,12 +1,16 @@
 import { IController } from "../../Controller";
 import { ISessionContext } from "../../services/SessionService";
 
-export function StartController(_context: ISessionContext): IController {
+export function StartController(context: ISessionContext): IController {
   return {
-    start(): Promise<any> {
+    name: "start",
+    resume() {
+      return Promise.resolve();
+    },
+    start() {
       const version = require("../../../package.json").version;
 
-      return this.session.puts(`TAU Mud Engine v${version}`);
+      return context.puts(`TAU Mud Engine v${version}`);
     },
   };
 }

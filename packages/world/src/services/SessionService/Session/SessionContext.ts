@@ -1,16 +1,13 @@
-import { ISessionSchema } from "./index";
+import { Service } from "moleculer";
 
 export interface ISessionContext {
   puts: (message: string) => Promise<any>;
 }
 
-export function SessionContext(session: ISessionSchema): ISessionContext {
+export function SessionContext(session: Service): ISessionContext {
   return {
     puts(message: string): Promise<any> {
-      return session.broker.call(
-        `tau.portal.connections.${session.settings.uuid}.puts`,
-        { message }
-      );
+      return session.actions.puts({ message: message });
     },
   };
 }

@@ -1,10 +1,17 @@
-import { ServiceBroker, BrokerOptions, ServiceRegistry } from "moleculer";
+import {
+  ServiceBroker,
+  BrokerOptions,
+  ServiceSchema,
+  ServiceRegistry,
+} from "moleculer";
 import { defaultsDeep, get } from "lodash";
 
-import { IPlugin, TPlugin } from "./Plugin";
+import { TPlugin } from "./Plugin";
 
 export interface IConfiguration {
   plugins?: Array<TPlugin>;
+  services?: Array<ServiceSchema>;
+  templates?: Array<any>;
 }
 
 export type TBrokerOptions = BrokerOptions;
@@ -113,33 +120,29 @@ function loadPlugins(
   config: IConfiguration
 ) {
   broker.logger.info("loading TAU plugins");
-  config.plugins.forEach((plugin) => {
-    const pluginInstance = defaultsDeep(
-      {
-        services: [],
-        portal: {
-          services: [],
-        },
-        world: {
-          services: [],
-        },
-      },
-      plugin(config)
-    );
+  config = defaultsDeep(
+    { name: processName },
+    config.plugins.reduce((mergedConfig: IConfiguration, plugin) => {
+      const pc = plugin(config);
+      broker.logger.info(`loading plugin configuration for '${pc.name}'`);
+      return defaultsDeep(mergedConfig, pc);
+    }, config)
+  );
 
-    loadServicesForPlugin(processName, broker, pluginInstance, config);
-  });
+  broker.logger.debug("configuration:");
+  broker.logger.debug(config);
+
+  loadServices(processName, broker, config);
 }
 
-function loadServicesForPlugin(
+function loadServices(
   processName: string,
   broker: ServiceBroker,
-  plugin: IPlugin,
   config: IConfiguration
 ) {
-  broker.logger.info(`loading plugin '${plugin.name}'`);
-  const globalServices = plugin.services;
-  const processServices = get(plugin, `${processName}.services`);
+  broker.logger.info(`loading services for process '${processName}'`);
+  const globalServices = config.services;
+  const processServices = get(config, `${processName}.services`);
   const services = globalServices.concat(processServices);
 
   services.forEach((PluginService: any) => {

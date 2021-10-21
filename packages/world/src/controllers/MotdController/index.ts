@@ -1,0 +1,1 @@
+export { MotdController } from "./MotdController";

@@ -18,7 +18,7 @@ class Screen extends EventEmitter implements IRenderBuffer {
   }
 
   write(str: string) {
-    this.out = str;
+    this.out = `${this.out}${str}`;
   }
 
   get() {

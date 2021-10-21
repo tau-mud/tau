@@ -5,8 +5,12 @@ import {
 } from "@tau/core";
 
 import { TController } from "./Controller";
-import { StartController } from "./controllers";
-import { MotdTemplate } from "./templates";
+import {
+  StartController,
+  MotdController,
+  RegistrationController,
+} from "./controllers";
+import { MotdTemplate, RegistrationTemplate } from "./templates";
 import { SessionService } from "./services/SessionService";
 
 interface IControllerMap {
@@ -33,9 +37,12 @@ export function WorldPlugin(_config: IConfiguration): IWorldPlugin {
       services: [SessionService],
       controllers: {
         start: StartController,
+        motd: MotdController,
+        registration: RegistrationController,
       },
       templates: {
         motd: MotdTemplate,
+        registration: RegistrationTemplate,
       },
     },
   };

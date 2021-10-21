@@ -1,7 +1,8 @@
+import React, { ReactElement } from "react";
+
 import { Context, GenericObject, ServiceSchema } from "moleculer";
 import { set, get } from "lodash";
 import { render } from "ink";
-import { WriteStream } from "fs";
 
 import { SessionContext } from "./SessionContext";
 import { RenderBuffer } from "./RenderBuffer";
@@ -61,12 +62,11 @@ export function Session(params: IConnectionSettings): ISessionSchema {
         return this.getFromStore(ctx.params.key, ctx.params.defaultValue);
       },
       puts(ctx: Context<IPutsParams>) {
-        return ctx.call(serviceEndpoint(this.settings, "puts"), ctx.params);
+        return this.puts(ctx.params.message);
       },
       setController(ctx: Context<ISetControllerParams>) {
         this.setController(ctx.params.controller);
       },
-
       destroySession() {
         this.broker.broadcast(
           `tau.world.sessions.destroyed.${this.settings.uuid}`,
@@ -84,44 +84,46 @@ export function Session(params: IConnectionSettings): ISessionSchema {
       },
     },
     methods: {
-      render(template, view) {
-        return this.broker
-          .call("tau.config.get", { template: template })
-          .then((template: JSX.Element) => {
-            renderToString(template[view](this.store));
-          });
+      puts(message: string) {
+        this.broker.call(serviceEndpoint(this.settings, "puts"), { message });
+      },
+      render(element: ReactElement) {
+        const buffer = RenderBuffer();
+
+        render(
+          element,
+          // @ts-ignore
+          { stdout: buffer }
+        );
+
+        return this.puts(buffer.get());
+      },
+      getController(): Promise<string> {
+        this.logger.debug("getting controller");
+        return this.getFromStore("controller");
       },
       setController(controllerToSet: string) {
         this.logger.debug(`setting controller to '${controllerToSet}'`);
-        let oldController: string;
 
-        return this.getFromStore("controller")
-          .then((controller: string): Promise<string> => {
-            oldController = controller;
-
-            return Promise.resolve(controller || "start");
+        return this.broker
+          .call("tau.config.getValue", {
+            key: `world.controllers.${controllerToSet}`,
           })
-          .then((controller: string) => {
-            return this.broker.call("tau.config.getValue", {
-              key: `world.controllers.${controller}`,
-            });
+          .then((controller: TController) => controller(SessionContext(this)))
+          .then((controllerInstance: IController) => {
+            return this.getFromStore("controller").then(
+              (currentController: string) => {
+                if (currentController === controllerToSet) {
+                  this.logger.debug(`resuming '${controllerToSet}'`);
+                  return controllerInstance.resume;
+                } else {
+                  this.logger.debug(`starting '${controllerToSet}'`);
+                  return controllerInstance.start;
+                }
+              }
+            );
           })
-          .then((controller: TController) => {
-            return controller(SessionContext(this));
-          })
-          .then((controller: IController) => {
-            if (controller.name == oldController) {
-              this.logger.debug(
-                `controller '${controller.name}' is the same as '${oldController}', calling resume`
-              );
-              return controller.resume();
-            } else {
-              this.logger.debug(
-                `controller '${controller.name}' is different than '${oldController}', calling start`
-              );
-              return controller.start();
-            }
-          })
+          .then((exec: () => Promise<any>) => exec())
           .then(() => {
             this.setInStore("controller", controllerToSet);
           });
@@ -139,6 +141,12 @@ export function Session(params: IConnectionSettings): ISessionSchema {
         );
 
         return Promise.resolve(value);
+      },
+      getFromFlash(key: string, defaultValue: any) {
+        return this.getFromStore(`flash.${key}`, defaultValue);
+      },
+      setInFlash(key: string, value: any) {
+        return this.setInFlash(`flash.${key}`, value);
       },
       getStoreFromConnection() {
         return this.broker.call(
@@ -164,12 +172,4 @@ function serviceEndpoint(params: IConnectionSettings, endpoint: string) {
 
 function servicePrefix(params: IConnectionSettings) {
   return `tau.portal.connections.${params.uuid}`;
-}
-
-function renderToString(template: JSX.Element) {
-  return render(
-    template,
-    // @ts-ignore
-    RenderBuffer()
-  );
 }

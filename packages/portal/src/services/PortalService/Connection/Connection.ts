@@ -2,6 +2,7 @@ import { Socket } from "net";
 
 import { v4 as uuidv4 } from "uuid";
 import { Context, GenericObject, ServiceSchema } from "moleculer";
+import { MessageContext, IMessageContext } from "./MessageContext";
 
 export interface IConnectionSettings {
   uuid: string;

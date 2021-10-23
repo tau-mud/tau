@@ -6,7 +6,7 @@ export const LoginTemplate = {
   emailOrCreate() {
     return (
       <Box>
-        <Text>Enter your account's email address or </Text>
+        <Text>Enter your account's username or </Text>
         <Text color="cyan" bold>
           'create'
         </Text>

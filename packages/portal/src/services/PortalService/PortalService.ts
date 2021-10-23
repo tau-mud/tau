@@ -1,5 +1,5 @@
 import { createServer, Socket } from "net";
-import { Context, Service, ServiceSchema } from "moleculer";
+import { Context, ServiceSchema } from "moleculer";
 
 import { IConfiguration } from "@tau/core";
 

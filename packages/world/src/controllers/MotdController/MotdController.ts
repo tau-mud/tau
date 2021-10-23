@@ -1,14 +1,15 @@
-import { IController } from "../../Controller";
+import { IMessageContext } from "@tau/portal";
+
 import { ISessionContext } from "../../services/SessionService";
 
-export function MotdController(context: ISessionContext): IController {
-  return {
-    name: "motd",
-    resume: () => Promise.resolve(),
-    start() {
-      return context
-        .render("motd.banner")
-        .then(() => context.setController("registration"));
-    },
-  };
-}
+export const MotdController = {
+  name: "motd",
+  resume: (_context: ISessionContext) => Promise.resolve(),
+  async start(context: ISessionContext) {
+    return context
+      .render("motd.banner")
+      .then(() => context.setController("login"));
+  },
+  handleInput: (_context: ISessionContext, _messageContext: IMessageContext) =>
+    Promise.resolve({}),
+};

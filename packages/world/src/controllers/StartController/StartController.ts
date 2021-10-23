@@ -14,5 +14,6 @@ export function StartController(context: ISessionContext): IController {
         .puts(`TAU Mud Engine v${version}`)
         .then(() => context.setController("motd"));
     },
+    handleInput: () => Promise.resolve({}),
   };
 }

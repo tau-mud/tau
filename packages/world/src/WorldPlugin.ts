@@ -8,9 +8,9 @@ import { TController } from "./Controller";
 import {
   StartController,
   MotdController,
-  RegistrationController,
+  LoginController,
 } from "./controllers";
-import { MotdTemplate, RegistrationTemplate } from "./templates";
+import { MotdTemplate, LoginTemplate } from "./templates";
 import { SessionService } from "./services/SessionService";
 
 interface IControllerMap {
@@ -38,11 +38,11 @@ export function WorldPlugin(_config: IConfiguration): IWorldPlugin {
       controllers: {
         start: StartController,
         motd: MotdController,
-        registration: RegistrationController,
+        login: LoginController,
       },
       templates: {
         motd: MotdTemplate,
-        registration: RegistrationTemplate,
+        login: LoginTemplate,
       },
     },
   };

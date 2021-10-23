@@ -1,4 +1,6 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
+
+import { IMessageContext, IConnectionSettings, IPutsParams } from "@tau/portal";
 
 import { Context, GenericObject, ServiceSchema } from "moleculer";
 import { set, get } from "lodash";
@@ -6,10 +8,7 @@ import { render } from "ink";
 
 import { SessionContext } from "./SessionContext";
 import { RenderBuffer } from "./RenderBuffer";
-
 import { IController, TController } from "../../../Controller";
-
-import { IConnectionSettings, IPutsParams } from "@tau/portal";
 
 interface ISetInStoreParams {
   key: string;
@@ -77,6 +76,7 @@ export function Session(params: IConnectionSettings): ISessionSchema {
 
         this.broker.destroyService(this);
       },
+      handleMessage(ctx: Context<IMessageContext>) {},
     },
     events: {
       "tau.portal.started"() {
@@ -162,6 +162,9 @@ export function Session(params: IConnectionSettings): ISessionSchema {
   };
   schema.events[`tau.portal.connections.disconnected.${params.uuid}`] =
     schema.actions.destroySession;
+
+  schema.events[`tau.portal.connections.message.${params.uuid}`] =
+    schema.actions.handleMessage;
 
   return schema;
 }

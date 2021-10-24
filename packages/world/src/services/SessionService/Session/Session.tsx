@@ -1,14 +1,14 @@
-import { ReactElement } from "react";
+import React, { ReactElement } from "react";
 
 import { IMessageContext, IConnectionSettings, IPutsParams } from "@tau/portal";
 
-import { Context, GenericObject, ServiceSchema } from "moleculer";
-import { set, get } from "lodash";
+import { Context, ServiceSchema } from "moleculer";
 import { render } from "ink";
 
-import { SessionContext } from "./SessionContext";
+import { ISessionContext, SessionContext } from "./SessionContext";
 import { RenderBuffer } from "./RenderBuffer";
-import { IController, TController } from "../../../Controller";
+import { IController } from "../../../Controller";
+import { TTemplate } from "../../../Template";
 
 interface ISetInStoreParams {
   key: string;
@@ -22,15 +22,15 @@ interface IGetFromStoreParams {
 
 interface ISetControllerParams {
   controller: string;
+  forceStart?: boolean;
+}
+
+interface IRenderParams {
+  template: string;
 }
 
 export interface ISessionSchema extends ServiceSchema {
   settings: IConnectionSettings;
-  store?: GenericObject;
-  setInStore?: (args: ISetControllerParams) => Promise<any>;
-  getFromStore?: (args: IGetFromStoreParams) => Promise<any>;
-  puts?: (args: IPutsParams) => Promise<any>;
-  setController?: (args: ISetControllerParams) => Promise<any>;
 }
 
 /**
@@ -38,34 +38,130 @@ export interface ISessionSchema extends ServiceSchema {
  * primary point in which all input and output to the player connection goes through.
  */
 export function Session(params: IConnectionSettings): ISessionSchema {
-  const schema = {
+  const schema: ISessionSchema = {
     name: `tau.world.sessions.${params.uuid}`,
     settings: params,
     dependencies: [`tau.portal.connections.${params.uuid}`],
     started() {
-      return this.getStoreFromConnection()
-        .then((store: any) => {
-          this.store = store;
-
-          return Promise.resolve(store.controller || "start");
-        })
-        .then((controller: string) => {
-          this.setController(controller);
+      return this.actions
+        .getController()
+        .then((controller: IController | null) => {
+          if (controller) {
+            return this.actions.resumeCurrentController();
+          } else {
+            return this.actions.setController({ controller: "start" });
+          }
         });
     },
     actions: {
+      /**
+       * Sets a value in the connection store.
+       *
+       * @actions
+       *
+       * @param {String} key - key to set
+       * @param {any} value - value to be set
+       */
       setInStore(ctx: Context<ISetInStoreParams>) {
-        return this.setInStore(ctx.params.key, ctx.params.value);
+        return ctx.call(
+          serviceEndpoint(this.settings, "setInStore"),
+          ctx.params
+        );
       },
+      /**
+       * Gets a value from the connection store. May return a default if the value was
+       * not found.
+       *
+       * @actions
+       *
+       * @param {String} key - the key to get the value for
+       * @param {any} defaultValue - the default value to use if the key was not found
+       */
       getFromStore(ctx: Context<IGetFromStoreParams>) {
-        return this.getFromStore(ctx.params.key, ctx.params.defaultValue);
+        return ctx.call(
+          serviceEndpoint(this.settings, "getFromStore"),
+          ctx.params
+        );
       },
+      /**
+       * Puts the provided message to the connection screen.
+       *
+       * @actions
+       *
+       * @param {String} message - the message to print to the connection screen
+       */
       puts(ctx: Context<IPutsParams>) {
-        return this.puts(ctx.params.message);
+        ctx.call(serviceEndpoint(this.settings, "puts"), ctx.params);
       },
+      /**
+       * Returns the currently active controller. If no controller has been set for this
+       * Session, then the `start` controller is returned.
+       *
+       * @actions
+       */
+      getController() {
+        this.logger.debug("getting controller");
+        return this.actions
+          .getFromStore({ key: "controller" })
+          .then((name: string): Promise<IController> => {
+            this.logger.debug(`the current controller is '${name}'`);
+            return this.broker.call("tau.config.getValue", {
+              key: `world.controllers.${name}`,
+            });
+          })
+          .then((controller: IController | null) => {
+            return controller;
+          });
+      },
+      /**
+       * Starts the currently set controller
+       *
+       * @actions
+       */
+      startCurrentController() {
+        this.actions.getController().then((controller: IController) => {
+          this.logger.debug(`starting '${controller.name}'`);
+          controller.start(SessionContext(this));
+        });
+      },
+      /**
+       * Resumes the currently set controller.
+       *
+       * @actions
+       */
+      resumeCurrentController() {
+        this.actions.getController().then((controller: IController) => {
+          this.logger.debug(`resuming '${controller.name}'`);
+          controller.resume(SessionContext(this));
+        });
+      },
+      /**
+       * Sets the controller. If the controller being set is the current controller, then the
+       * controller's resume function is called, otherwise the controller's start function
+       * is called
+       *
+       * @actions
+       *
+       * @param {String} controller - the name of the controller
+       */
       setController(ctx: Context<ISetControllerParams>) {
-        this.setController(ctx.params.controller);
+        this.logger.debug(`setting controller to '${ctx.params.controller}'`);
+        return this.broker
+          .call("tau.config.getValue", {
+            key: `world.controllers.${ctx.params.controller}`,
+          })
+          .then((controller: IController) => {
+            return this.actions
+              .setInStore({ key: "controller", value: controller.name })
+              .then(() => controller);
+          })
+          .then(() => this.actions.startCurrentController());
       },
+      /**
+       * Destroys the session.
+       *
+       * @actions
+       */
       destroySession() {
         this.broker.broadcast(
           `tau.world.sessions.destroyed.${this.settings.uuid}`,
@@ -76,7 +172,58 @@ export function Session(params: IConnectionSettings): ISessionSchema {
 
         this.broker.destroyService(this);
       },
-      handleMessage(ctx: Context<IMessageContext>) {},
+      /**
+       * Handles incomming messages from the `Connection` and forwards it to the controller.
+       *
+       * @actions
+       *
+       * @param {String} message - the message from the connection.
+       */
+      handleInput(ctx: Context<IMessageContext>) {
+        this.logger.debug("handling input");
+        return this.actions.getController().then((controller: IController) => {
+          this.logger.debug(
+            `received input from connection, passing to '${controller.name}' controller`
+          );
+          return controller.handleInput(SessionContext(this), ctx.params);
+        });
+      },
+      /**
+       * Renders the react element to the player `Connection`.
+       *
+       * @actions
+       *
+       * @param {String} template - the name of the template to render
+       */
+      async renderTemplate(ctx: Context<IRenderParams>) {
+        this.logger.debug(`rendering template '${ctx.params.template}'`);
+        return ctx
+          .call("tau.config.getValue", {
+            key: `world.templates.${ctx.params.template}`,
+          })
+          .then((template: TTemplate) => {
+            if (template) {
+              this.logger.debug(`building template '${ctx.params.template}'`);
+              return template();
+            } else {
+              throw `the template '${ctx.params.template}' was not found`;
+            }
+          })
+          .then((view: ReactElement) => {
+            this.logger.debug(
+              `rendering template '${ctx.params.template}' into buffer`
+            );
+            const buffer = RenderBuffer();
+
+            render(
+              view,
+              // @ts-ignore
+              { stdout: buffer }
+            );
+
+            return this.actions.puts({ message: buffer.get() });
+          });
+      },
     },
     events: {
       "tau.portal.started"() {
@@ -84,87 +231,20 @@ export function Session(params: IConnectionSettings): ISessionSchema {
       },
     },
     methods: {
-      puts(message: string) {
-        this.broker.call(serviceEndpoint(this.settings, "puts"), { message });
-      },
-      render(element: ReactElement) {
-        const buffer = RenderBuffer();
-
-        render(
-          element,
-          // @ts-ignore
-          { stdout: buffer }
-        );
-
-        return this.puts(buffer.get());
-      },
-      getController(): Promise<string> {
-        this.logger.debug("getting controller");
-        return this.getFromStore("controller");
-      },
-      setController(controllerToSet: string) {
-        this.logger.debug(`setting controller to '${controllerToSet}'`);
-
-        return this.broker
-          .call("tau.config.getValue", {
-            key: `world.controllers.${controllerToSet}`,
-          })
-          .then((controller: TController) => controller(SessionContext(this)))
-          .then((controllerInstance: IController) => {
-            return this.getFromStore("controller").then(
-              (currentController: string) => {
-                if (currentController === controllerToSet) {
-                  this.logger.debug(`resuming '${controllerToSet}'`);
-                  return controllerInstance.resume;
-                } else {
-                  this.logger.debug(`starting '${controllerToSet}'`);
-                  return controllerInstance.start;
-                }
-              }
-            );
-          })
-          .then((exec: () => Promise<any>) => exec())
-          .then(() => {
-            this.setInStore("controller", controllerToSet);
-          });
-      },
-      getFromStore(key: string, def: any = null) {
-        return Promise.resolve(get(this.store, key, def));
-      },
-      setInStore(key: string, value: any) {
-        this.logger.debug(`setting '${key}' in store`);
-        this.store = set(this.store, key, value);
-        // ensure we synchronize the new state across all services that care
-        this.broker.broadcast(
-          `tau.world.sessions.store-updated.${this.settings.uuid}`,
-          this.store
-        );
-
-        return Promise.resolve(value);
-      },
       getFromFlash(key: string, defaultValue: any) {
-        return this.getFromStore(`flash.${key}`, defaultValue);
+        return this.actions.getFromStore({
+          key: `flash.${key}`,
+          defaultValue: defaultValue,
+        });
       },
       setInFlash(key: string, value: any) {
-        return this.setInFlash(`flash.${key}`, value);
+        return this.actions.setInStore({ key: `flash.${key}`, value });
       },
-      getStoreFromConnection() {
-        return this.broker.call(
-          `tau.portal.connections.${this.settings.uuid}.getStore`
-        );
-      },
-    },
-    created() {
-      this.store = {
-        flash: {},
-      };
     },
   };
+
   schema.events[`tau.portal.connections.disconnected.${params.uuid}`] =
     schema.actions.destroySession;
-
-  schema.events[`tau.portal.connections.message.${params.uuid}`] =
-    schema.actions.handleMessage;
 
   return schema;
 }

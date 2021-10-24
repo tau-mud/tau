@@ -1,7 +1,7 @@
 {
-  "name": "@tau/world",
+  "name": "@tau/accounts",
   "version": "0.0.0",
-  "description": "> TODO: description",
+  "description": "Tau Mud Engine - Accounts Plugin",
   "author": "Jarod <therealfugu@gmail.com>",
   "homepage": "",
   "license": "ISC",
@@ -35,9 +35,8 @@
   "dependencies": {
     "@tau/core": "file:../core",
     "@tau/portal": "file:../portal",
-    "eventemitter2": "^6.4.5",
+    "@tau/world": "file:../world",
     "ink": "^3.2.0",
-    "moleculer": "^0.14.17",
-    "react": "^17.0.2"
+    "moleculer": "^0.14.17"
   }
 }

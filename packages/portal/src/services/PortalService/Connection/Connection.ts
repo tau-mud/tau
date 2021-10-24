@@ -1,4 +1,5 @@
 import { Socket } from "net";
+import { set, get } from "lodash";
 
 import { v4 as uuidv4 } from "uuid";
 import { Context, GenericObject, ServiceSchema } from "moleculer";
@@ -33,12 +34,16 @@ export function Connection(socket: Socket): IConnectionSchema {
     },
     events: {},
     actions: {
-      getStore() {
-        return this.store;
+      getFromStore(ctx: Context<GenericObject>) {
+        return Promise.resolve(
+          get(this.store, ctx.params.key, ctx.params.defaultValue)
+        );
       },
-      setStore(ctx: Context<GenericObject>) {
-        this.logger.debug("setting store to:", ctx.params);
-        this.store = ctx.params;
+      setInStore(ctx: Context<GenericObject>) {
+        this.logger.debug(`setting '${ctx.params.key}' in store`);
+        this.store = set(this.store, ctx.params.key, ctx.params.value);
+
+        return ctx.params.value;
       },
       puts(ctx: Context<IPutsParams>) {
         return socket.write(`${ctx.params.message}\r\n`);
@@ -61,9 +66,22 @@ export function Connection(socket: Socket): IConnectionSchema {
           remoteAddress: this.settings.remoteAddress,
         });
       },
+      handleInput(data: Buffer | String) {
+        const message = MessageContext(
+          data.toString().replace(/(\r\n|\n|\r)/gm, "")
+        );
+
+        this.broker.call(
+          `tau.world.sessions.${this.settings.uuid}.handleInput`,
+          {
+            message,
+          }
+        );
+      },
     },
     created() {
       socket.on("close", this.handleDisconnect);
+      socket.on("data", this.handleInput);
 
       this.store = {};
 
@@ -71,9 +89,6 @@ export function Connection(socket: Socket): IConnectionSchema {
       this.notifySessionCreated();
     },
   };
-
-  schema.events[`tau.world.sessions.store-updated.${uuid}`] =
-    schema.actions.setStore;
 
   return schema;
 }

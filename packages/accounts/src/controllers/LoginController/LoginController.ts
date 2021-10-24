@@ -1,6 +1,5 @@
 import { IMessageContext } from "@tau/portal";
-
-import { ISessionContext } from "../../services/SessionService";
+import { ISessionContext } from "@tau/world";
 
 export const LoginController = {
   name: "login",
@@ -9,11 +8,12 @@ export const LoginController = {
     return renderStep(context);
   },
   handleInput(context: ISessionContext, message: IMessageContext) {
+    console.log(message);
     return handleInputForStep(context, message);
   },
 };
 
-function handleInputForStep(
+async function handleInputForStep(
   context: ISessionContext,
   message: IMessageContext
 ): Promise<any> {
@@ -25,7 +25,11 @@ function handleInputForStep(
   });
 }
 
-function handleUsernameInput(context: ISessionContext, message: IMessage) {
+function handleUsernameInput(
+  context: ISessionContext,
+  message: IMessageContext
+) {
+  console.log(message);
   switch (message.message) {
     case "create":
       return context.setController("register");

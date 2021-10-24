@@ -1,19 +1,19 @@
-import { IController } from "../../Controller";
+import { IMessageContext } from "@tau/portal";
+
 import { ISessionContext } from "../../services/SessionService";
 
-export function StartController(context: ISessionContext): IController {
-  return {
-    name: "start",
-    resume() {
-      return Promise.resolve();
-    },
-    start() {
-      const version = require("../../../package.json").version;
+export const StartController = {
+  name: "start",
+  resume(_context: ISessionContext) {
+    return Promise.resolve();
+  },
+  async start(context: ISessionContext) {
+    const version = require("../../../package.json").version;
 
-      return context
-        .puts(`TAU Mud Engine v${version}`)
-        .then(() => context.setController("motd"));
-    },
-    handleInput: () => Promise.resolve({}),
-  };
-}
+    return context
+      .puts(`TAU Mud Engine v${version}`)
+      .then(() => context.setController("motd"));
+  },
+  handleInput: (_context: ISessionContext, _messageContext: IMessageContext) =>
+    Promise.resolve({}),
+};

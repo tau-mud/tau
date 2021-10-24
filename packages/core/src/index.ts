@@ -1,3 +1,4 @@
 export { IConfiguration, Configure, TBrokerOptions } from "./Configure";
-export { IPlugin, TPlugin, IWorldOptions } from "./Plugin";
+export { IPlugin, TPlugin } from "./Plugin";
 export { CorePlugin } from "./CorePlugin";
+export { TService } from "./Service";

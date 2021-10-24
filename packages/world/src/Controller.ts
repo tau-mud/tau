@@ -1,4 +1,4 @@
-import { IMessageContext } from "@tau/core";
+import { IMessageContext } from "@tau/portal";
 
 import { ISessionContext } from "./services/SessionService";
 
@@ -7,7 +7,7 @@ export interface IController {
   start(context: ISessionContext): Promise<any>;
   resume(context: ISessionContext): Promise<any>;
   handleInput(
-    messageContext: IMessageContext,
-    context: ISessionContext
+    context: ISessionContext,
+    messageContext: IMessageContext
   ): Promise<any>;
 }

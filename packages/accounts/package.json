@@ -37,6 +37,10 @@
     "@tau/portal": "file:../portal",
     "@tau/world": "file:../world",
     "ink": "^3.2.0",
-    "moleculer": "^0.14.17"
+    "moleculer": "^0.14.17",
+    "moleculer-db": "^0.8.16",
+    "moleculer-db-adapter-mongoose": "^0.8.12",
+    "mongoose": "5.8.11",
+    "react": "^17.0.2"
   }
 }

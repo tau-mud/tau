@@ -3,7 +3,7 @@ import React from "react";
 import { Box, Text } from "ink";
 
 export const LoginTemplate = {
-  emailOrCreate() {
+  usernameOrCreate() {
     return (
       <Box>
         <Text>Enter your account's username or </Text>

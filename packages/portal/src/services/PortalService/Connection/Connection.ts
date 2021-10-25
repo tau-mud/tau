@@ -3,7 +3,7 @@ import { set, get } from "lodash";
 
 import { v4 as uuidv4 } from "uuid";
 import { Context, GenericObject, ServiceSchema } from "moleculer";
-import { MessageContext, IMessageContext } from "./MessageContext";
+import { MessageContext } from "./MessageContext";
 
 export interface IConnectionSettings {
   uuid: string;
@@ -73,9 +73,7 @@ export function Connection(socket: Socket): IConnectionSchema {
 
         this.broker.call(
           `tau.world.sessions.${this.settings.uuid}.handleInput`,
-          {
-            message,
-          }
+          message
         );
       },
     },

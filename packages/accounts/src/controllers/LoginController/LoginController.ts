@@ -8,7 +8,6 @@ export const LoginController = {
     return renderStep(context);
   },
   handleInput(context: ISessionContext, message: IMessageContext) {
-    console.log(message);
     return handleInputForStep(context, message);
   },
 };
@@ -29,10 +28,9 @@ function handleUsernameInput(
   context: ISessionContext,
   message: IMessageContext
 ) {
-  console.log(message);
   switch (message.message) {
     case "create":
-      return context.setController("register");
+      return context.setController("registration");
   }
 }
 
@@ -40,7 +38,7 @@ function renderStep(context: ISessionContext): Promise<void> {
   return context.getFromFlash("step", 0).then((step: number) => {
     switch (step) {
       case 0:
-        return context.render("login.emailOrCreate");
+        return context.render("login.usernameOrCreate");
     }
   });
 }

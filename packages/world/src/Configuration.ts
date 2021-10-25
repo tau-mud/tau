@@ -1,4 +1,4 @@
-import { TService } from "@tau/core";
+import { IServiceMap } from "@tau/core";
 
 import { IController } from "./Controller";
 import { ITemplate } from "./Template";
@@ -12,7 +12,7 @@ interface ITemplateMap {
 }
 
 export interface IWorldOptions {
-  services: Array<TService>;
+  services: IServiceMap;
   controllers?: IControllerMap;
   templates?: ITemplateMap;
 }

@@ -124,8 +124,7 @@ function loadPlugins(
     { name: processName },
     config.plugins.reduce((mergedConfig: IConfiguration, plugin) => {
       const pc = plugin(config);
-      broker.logger.info(`loading plugin configuration for '${pc.name}'`);
-      return defaultsDeep(mergedConfig, pc);
+      return defaultsDeep({ ...mergedConfig }, pc);
     }, config)
   );
 
@@ -143,9 +142,12 @@ function loadServices(
   broker.logger.info(`loading services for process '${processName}'`);
   const globalServices = config.services;
   const processServices = get(config, `${processName}.services`);
-  const services = globalServices.concat(processServices);
+  const services = {
+    ...globalServices,
+    ...processServices,
+  };
 
-  services.forEach((PluginService: any) => {
+  Object.values(services).forEach((PluginService: any) => {
     const service = new PluginService(config);
     broker.logger.info(`loading sesrvice '${service.name}'`);
     broker.createService(service);

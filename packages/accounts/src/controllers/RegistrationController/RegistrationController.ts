@@ -65,9 +65,18 @@ async function handleInput(context: ISessionContext, message: IMessageContext) {
               .then(() => renderStep(context));
         }
       case 2:
-        return context.call("tau.accounts.validatePassword", {
-          password: message.message,
-        });
+        return context
+          .call("tau.accounts.validatePassword", {
+            password: message.message,
+          })
+          .then((validation) => {
+            if (validation.valid) {
+            } else {
+              return context
+                .render(`registration.${validation.message}`)
+                .then(() => renderStep(context));
+            }
+          });
     }
   });
 }

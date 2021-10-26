@@ -45,6 +45,71 @@ export const RegistrationTemplate = {
       </Box>
     );
   },
+  passwordTooShort() {
+    return (
+      <Box>
+        <Text>
+          <Text>The password must be at least </Text>
+          <Text color="yellow" bold>
+            6
+          </Text>
+          <Text> characters long.</Text>
+        </Text>
+      </Box>
+    );
+  },
+  passwordMustContainSymbol() {
+    return (
+      <Box>
+        <Text>
+          <Text>The password </Text>
+          <Text color="yellow" bold>
+            must contain at least one symbol
+          </Text>
+          <Text>.</Text>
+        </Text>
+      </Box>
+    );
+  },
+  passwordMustContainLowercase() {
+    return (
+      <Box>
+        <Text>
+          <Text>The password </Text>
+          <Text color="yellow" bold>
+            must contain at least one lowercase character
+          </Text>
+          <Text>.</Text>
+        </Text>
+      </Box>
+    );
+  },
+  passwordMustContainUppercase() {
+    return (
+      <Box>
+        <Text>
+          <Text>The password </Text>
+          <Text color="yellow" bold>
+            must contain at least one uppercase character
+          </Text>
+          <Text>.</Text>
+        </Text>
+      </Box>
+    );
+  },
+  passwordMustContainDigit() {
+    return (
+      <Box>
+        <Text>
+          <Text>The password </Text>
+          <Text color="yellow" bold>
+            must contain at least one digit
+          </Text>
+          <Text>.</Text>
+        </Text>
+      </Box>
+    );
+  },
   usernameEmpty() {
     return (
       <Box>

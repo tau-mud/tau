@@ -10,6 +10,10 @@ interface IValidateUsernameParams {
   username: string;
 }
 
+interface IValidatePasswordParams {
+  password: string;
+}
+
 export function AccountsService(config: IAccountsConfiguration) {
   return {
     name: "tau.accounts",
@@ -24,7 +28,44 @@ export function AccountsService(config: IAccountsConfiguration) {
       })
     ),
     actions: {
-      validatePassword(password: string) {},
+      validatePassword(ctx: Context<IValidatePasswordParams>) {
+        if (ctx.params.password.length < 6) {
+          return Promise.resolve({
+            valid: false,
+            message: "passwordTooShort",
+          });
+        }
+
+        if (!ctx.params.password.match(/[^a-zA-Z\d]/)) {
+          return Promise.resolve({
+            valid: false,
+            message: "passwordMustContainSymbol",
+          });
+        }
+
+        if (!ctx.params.password.match(/[a-z]/)) {
+          return Promise.resolve({
+            valid: false,
+            message: "passwordMustContainLowercase",
+          });
+        }
+
+        if (!ctx.params.password.match(/[A-Z]/)) {
+          return Promise.resolve({
+            valid: false,
+            message: "passwordMustContainUppercase",
+          });
+        }
+
+        if (!ctx.params.password.match(/[0-9]/)) {
+          return Promise.resolve({
+            valid: false,
+            message: "passwordMustContainDigit",
+          });
+        }
+
+        return Promise.resolve({ valid: true });
+      },
       validateUsername(ctx: Context<IValidateUsernameParams>) {
         if (ctx.params.username == "") {
           return Promise.resolve({

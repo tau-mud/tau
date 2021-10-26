@@ -24,6 +24,7 @@ export function AccountsService(config: IAccountsConfiguration) {
       })
     ),
     actions: {
+      validatePassword(password: string) {},
       validateUsername(ctx: Context<IValidateUsernameParams>) {
         if (ctx.params.username == "") {
           return Promise.resolve({

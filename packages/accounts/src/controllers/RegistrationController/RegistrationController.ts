@@ -18,7 +18,13 @@ async function renderStep(context: ISessionContext): Promise<void> {
       case 0:
         return context.render("registration.promptUsername");
       case 1:
-        return context.render("registration.confirmUsername");
+        return context
+          .getFromFlash("username")
+          .then((username: string) =>
+            context.render("registration.confirmUsername", { username })
+          );
+      case 2:
+        return context.render("registration.promptPassword");
     }
   });
 }
@@ -31,14 +37,37 @@ async function handleInput(context: ISessionContext, message: IMessageContext) {
           .call("tau.accounts.validateUsername", {
             username: message.message,
           })
-          .then((validation) => {
+          .then(async (validation) => {
             if (validation.valid) {
+              return context
+                .setInFlash("username", message.message)
+                .then(() => context.setInFlash("step", 1))
+                .then(() => renderStep(context));
             } else {
               context.render(`registration.${validation.message}`, {
                 username: message.message,
               });
             }
           });
+      case 1:
+        const value = message.message.toLowerCase();
+
+        switch (value) {
+          case "n":
+          case "no":
+            return context
+              .setInFlash("step", 0)
+              .then(() => renderStep(context));
+          case "y":
+          case "yes":
+            return context
+              .setInFlash("step", 2)
+              .then(() => renderStep(context));
+        }
+      case 2:
+        return context.call("tau.accounts.validatePassword", {
+          password: message.message,
+        });
     }
   });
 }

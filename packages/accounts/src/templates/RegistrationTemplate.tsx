@@ -17,6 +17,34 @@ export const RegistrationTemplate = {
       </Box>
     );
   },
+  confirmUsername(context: IUsernameContext) {
+    return (
+      <Box>
+        <Text>
+          <Text>You chose &apos;</Text>
+          <Text color="green" bold>
+            {context.username}
+          </Text>
+          <Text>&apos; is this correct? (</Text>
+          <Text color="cyan" bold>
+            Y
+          </Text>
+          <Text>/</Text>
+          <Text color="cyan" bold>
+            N
+          </Text>
+          <Text>)</Text>
+        </Text>
+      </Box>
+    );
+  },
+  promptPassword() {
+    return (
+      <Box>
+        <Text>Enter your password:</Text>
+      </Box>
+    );
+  },
   usernameEmpty() {
     return (
       <Box>
@@ -28,7 +56,7 @@ export const RegistrationTemplate = {
     return (
       <Box>
         <Text>The username &apos;</Text>
-        <Text color="cyan" bold>
+        <Text color="green" bold>
           {context.username}
         </Text>
         <Text>&apos; is too short. It must be at least </Text>
@@ -43,7 +71,7 @@ export const RegistrationTemplate = {
     return (
       <Box>
         <Text>The username &apos;</Text>
-        <Text color="cyan" bold>
+        <Text color="green" bold>
           {context.username}
         </Text>
         <Text>&apos; is too long. It must be at most </Text>
@@ -59,7 +87,7 @@ export const RegistrationTemplate = {
       <Box width={100}>
         <Text>
           The username &apos;
-          <Text color="cyan" bold>
+          <Text color="green" bold>
             {context.username}
           </Text>
           <Text>&apos; is invalid. It must </Text>

@@ -50,7 +50,9 @@ export function Session(params: IConnectionSettings): ISessionSchema {
           if (controller) {
             return this.actions.resumeCurrentController();
           } else {
-            return this.actions.setController({ controller: "start" });
+            return this.actions
+              .setController({ controller: "start" })
+              .then(() => this.actions.setInStore({ key: "flash", value: {} }));
           }
         });
     },

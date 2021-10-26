@@ -2,10 +2,10 @@ import React, { ReactElement } from "react";
 
 import { IMessageContext, IConnectionSettings, IPutsParams } from "@tau/portal";
 
-import { Context, ServiceSchema } from "moleculer";
+import { GenericObject, Context, ServiceSchema } from "moleculer";
 import { render } from "ink";
 
-import { ISessionContext, SessionContext } from "./SessionContext";
+import { SessionContext } from "./SessionContext";
 import { RenderBuffer } from "./RenderBuffer";
 import { IController } from "../../../Controller";
 import { TTemplate } from "../../../Template";
@@ -27,6 +27,7 @@ interface ISetControllerParams {
 
 interface IRenderParams {
   template: string;
+  context: GenericObject;
 }
 
 export interface ISessionSchema extends ServiceSchema {
@@ -204,7 +205,7 @@ export function Session(params: IConnectionSettings): ISessionSchema {
           .then((template: TTemplate) => {
             if (template) {
               this.logger.debug(`building template '${ctx.params.template}'`);
-              return template();
+              return template(ctx.params.context);
             } else {
               throw `the template '${ctx.params.template}' was not found`;
             }

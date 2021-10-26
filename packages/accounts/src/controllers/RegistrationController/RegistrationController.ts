@@ -28,9 +28,17 @@ async function handleInput(context: ISessionContext, message: IMessageContext) {
     switch (step) {
       case 0:
         return context
-          .setInFlash("username", message.message)
-          .then(() => context.setInFlash("step", 1))
-          .then(() => renderStep(context));
+          .call("tau.accounts.validateUsername", {
+            username: message.message,
+          })
+          .then((validation) => {
+            if (validation.valid) {
+            } else {
+              context.render(`registration.${validation.message}`, {
+                username: message.message,
+              });
+            }
+          });
     }
   });
 }

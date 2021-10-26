@@ -1,5 +1,7 @@
-export type TTemplate = () => JSX.Element;
+import { GenericObject } from "moleculer";
+
+export type TTemplate = (context: GenericObject) => JSX.Element;
 
 export interface ITemplate {
-  [key: string]: () => JSX.Element;
+  [key: string]: TTemplate;
 }

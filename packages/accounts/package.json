@@ -23,12 +23,14 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/lodash": "^4.14.175",
     "@types/node": "^16.11.0",
     "@types/react": "^17.0.30",
     "@types/yoga-layout": "^1.9.4",
     "fixjson": "^1.1.2",
     "jsonlint": "^1.6.3",
+    "prettier": "^2.4.1",
     "standard": "^16.0.4",
     "typescript": "^4.4.4"
   },
@@ -36,6 +38,7 @@
     "@tau/core": "file:../core",
     "@tau/portal": "file:../portal",
     "@tau/world": "file:../world",
+    "bcrypt": "^5.0.1",
     "ink": "^3.2.0",
     "moleculer": "^0.14.17",
     "moleculer-db": "^0.8.16",

@@ -7,6 +7,20 @@ interface IUsernameContext {
 }
 
 export const RegistrationTemplate = {
+  passwordConfirmationFailed() {
+    return (
+      <Box>
+        <Text>The confirmation didn&apos;t match the provided password.</Text>
+      </Box>
+    );
+  },
+  promptConfirmPassword() {
+    return (
+      <Box>
+        <Text>Confirm your password:</Text>
+      </Box>
+    );
+  },
   promptUsername() {
     return (
       <Box>

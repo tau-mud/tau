@@ -1,5 +1,6 @@
 import { IMessageContext } from "@tau/portal";
 import { ISessionContext } from "@tau/world";
+import { hash, compare } from "bcrypt";
 
 export const RegistrationController = {
   name: "registration",
@@ -13,7 +14,7 @@ export const RegistrationController = {
 };
 
 async function renderStep(context: ISessionContext): Promise<void> {
-  return context.getFromFlash("step", 0).then((step: number) => {
+  return context.getFromFlash("step", 0).then(async (step: number) => {
     switch (step) {
       case 0:
         return context.render("registration.promptUsername");
@@ -25,6 +26,8 @@ async function renderStep(context: ISessionContext): Promise<void> {
           );
       case 2:
         return context.render("registration.promptPassword");
+      case 3:
+        return context.render("registration.promptConfirmPassword");
     }
   });
 }
@@ -69,11 +72,34 @@ async function handleInput(context: ISessionContext, message: IMessageContext) {
           .call("tau.accounts.validatePassword", {
             password: message.message,
           })
-          .then((validation) => {
+          .then(async (validation) => {
             if (validation.valid) {
+              return hash(message.message, 10)
+                .then((hashedPassword: string) =>
+                  context.setInFlash("hashedPassword", hashedPassword)
+                )
+                .then(() => context.setInFlash("step", 3))
+                .then(() => renderStep(context));
             } else {
               return context
                 .render(`registration.${validation.message}`)
+                .then(() => renderStep(context));
+            }
+          });
+      case 3:
+        return context
+          .getFromFlash("hashedPassword")
+          .then((hashedPassword: string) =>
+            compare(message.message, hashedPassword)
+          )
+          .then(async (valid: boolean) => {
+            if (valid) {
+            } else {
+              return context
+                .setInFlash("step", 2)
+                .then(() =>
+                  context.render("registration.passwordConfirmationFailed")
+                )
                 .then(() => renderStep(context));
             }
           });

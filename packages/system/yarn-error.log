@@ -1,0 +1,73 @@
+Arguments: 
+  /Users/fugufish/.nvm/versions/node/v14.17.1/bin/node /Users/fugufish/.nvm/versions/node/v14.17.1/bin/yarn link @tau/core
+
+PATH: 
+  /Users/fugufish/.rvm/gems/ruby-3.0.1/bin:/Users/fugufish/.rvm/gems/ruby-3.0.1@global/bin:/Users/fugufish/.rvm/rubies/ruby-3.0.1/bin:/Users/fugufish/google-cloud-sdk/bin:/Users/fugufish/.nvm/versions/node/v14.17.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/fugufish/.rvm/gems/ruby-3.0.1/bin:/Users/fugufish/.rvm/gems/ruby-3.0.1@global/bin:/Users/fugufish/.rvm/rubies/ruby-3.0.1/bin:/Users/fugufish/google-cloud-sdk/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/fugufish/.nvm/versions/node/v14.17.1/bin:/Users/fugufish/.rvm/bin:/Users/fugufish/.rvm/bin
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  14.17.1
+
+Platform: 
+  darwin arm64
+
+Trace: 
+  SyntaxError: /Users/fugufish/Code/mjolnir/js/mjolnir/packages/system/package.json: Unexpected string in JSON at position 557
+      at JSON.parse (<anonymous>)
+      at /Users/fugufish/.nvm/versions/node/v14.17.1/lib/node_modules/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/Users/fugufish/.nvm/versions/node/v14.17.1/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /Users/fugufish/.nvm/versions/node/v14.17.1/lib/node_modules/yarn/lib/cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "@tau/system",
+    "version": "0.0.0",
+    "description": "> TODO: description",
+    "author": "Jarod <therealfugu@gmail.com>",
+    "homepage": "",
+    "license": "ISC",
+    "main": "lib/index.js",
+    "directories": {
+      "lib": "lib",
+      "test": "__tests__"
+    },
+    "files": [
+      "lib"
+    ],
+    "publishConfig": {
+      "access": "public"
+    },
+    "scripts": {
+      "clean": "rm -rf lib/**; mkdir lib",
+      "build": "tsc -p tsconfig.build.json",
+      "watch": "tsc --watch -p tsconfig.build.json",
+      "test": "echo \"Error: run tests from root\" && exit 1"
+    }
+    "devDependencies": {
+      "@types/lodash": "^4.14.175",
+      "@types/node": "^16.11.0",
+      "@types/react": "^17.0.30",
+      "@types/yoga-layout": "^1.9.4",
+      "fixjson": "^1.1.2",
+      "jsonlint": "^1.6.3",
+      "prettier": "^2.4.1",
+      "standard": "^16.0.4",
+      "typescript": "^4.4.4"
+    },
+    "dependencies": {
+      "@tau/core": "file:../core",
+      "@tau/world": "file:../world",
+      "ink": "^3.2.0",
+      "moleculer": "^0.14.17",
+      "react": "^17.0.2"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

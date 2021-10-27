@@ -2,7 +2,7 @@ import { IPlugin, IConfiguration } from "@tau/core";
 
 import { StartController, MotdController } from "./controllers";
 import { MotdTemplate } from "./templates";
-import { SessionService } from "./services/SessionService";
+import { SessionService, EntityService, ComponentsService } from "./services";
 import { IWorldOptions } from "./Configuration";
 
 interface IWorldPlugin extends IPlugin {
@@ -13,7 +13,7 @@ export function WorldPlugin(_config: IConfiguration): IWorldPlugin {
   return {
     name: "world",
     world: {
-      services: { SessionService },
+      services: { SessionService, EntityService, ComponentsService },
       controllers: {
         start: StartController,
         motd: MotdController,

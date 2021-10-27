@@ -8,10 +8,16 @@ import { defaultsDeep, get } from "lodash";
 
 import { TPlugin } from "./Plugin";
 
+interface IRedisConfig {
+  host: string;
+  port: string;
+}
+
 export interface IConfiguration {
   plugins?: Array<TPlugin>;
   services?: Array<ServiceSchema>;
   templates?: Array<any>;
+  redis: IRedisConfig;
 }
 
 export type TBrokerOptions = BrokerOptions;
@@ -40,7 +46,15 @@ export function Configure(
     },
     logLevel: "trace",
     transporter: "nats://localhost:4222",
-    cacher: "Redis",
+    cacher: {
+      type: "Redis",
+      options: {
+        redis: {
+          host: config.redis.host,
+          port: config.redis.port
+        }
+      }
+    },
     serializer: "JSON",
     requestTimeout: 10 * 1000,
     retryPolicy: {

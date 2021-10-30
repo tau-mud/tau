@@ -1,16 +1,16 @@
 import { ServiceSchema } from "moleculer";
-import Redis from "moleculer-redis"
+import Redis from "moleculer-redis";
 
-import { IConfiguration } from "@tau/core";
+import { IWorldPlugin } from "../../WorldPlugin";
 
-
-export function ComponentsService(config: IConfiguration): ServiceSchema {
+export function ComponentsService(config: IWorldPlugin): ServiceSchema {
   return {
     name: "tau.world.components",
     mixins: [Redis],
     settings: {
       host: config.redis.host,
-      port: config.redis.port
+      port: config.redis.port,
+      componentTypes: config.world.componentTypes,
     },
-  }
+  };
 }

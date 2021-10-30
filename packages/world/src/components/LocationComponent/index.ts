@@ -1,0 +1,1 @@
+export { LocationComponent } from "./LocationComponent";

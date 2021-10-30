@@ -5,7 +5,7 @@ import { MotdTemplate } from "./templates";
 import { SessionService, EntityService, ComponentsService } from "./services";
 import { IWorldOptions } from "./Configuration";
 
-interface IWorldPlugin extends IPlugin {
+export interface IWorldPlugin extends IPlugin {
   world: IWorldOptions;
 }
 

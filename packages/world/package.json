@@ -23,20 +23,24 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "devDependencies": {
+    "@types/jest": "^27.0.2",
     "@types/lodash": "^4.14.175",
     "@types/node": "^16.11.0",
     "@types/react": "^17.0.30",
     "@types/yoga-layout": "^1.9.4",
     "fixjson": "^1.1.2",
+    "jest": "^27.3.1",
     "jsonlint": "^1.6.3",
     "prettier": "^2.4.1",
     "standard": "^16.0.4",
+    "ts-jest": "^27.0.7",
     "typescript": "^4.4.4"
   },
   "dependencies": {
     "@tau/core": "file:../core",
     "@tau/portal": "file:../portal",
     "eventemitter2": "^6.4.5",
+    "fastest-validator": "^1.12.0",
     "ink": "^3.2.0",
     "moelculer-redis": "file:../../../moleculer-redis",
     "moleculer": "^0.14.17",

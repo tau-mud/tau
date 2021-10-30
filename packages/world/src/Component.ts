@@ -29,8 +29,8 @@ export function ComposeComponent(
   const base = {
     name: last(components).name,
     composedOf: composedOf,
-    build: (args: any = {}) =>
-      components.reduce((prev: object, cur: IComponent<any>) => {
+    build(args: any = {}) {
+      const obj = components.reduce((prev: object, cur: IComponent<any>) => {
         let argsForBuild: any;
 
         if (typeof args === "object") {
@@ -40,7 +40,16 @@ export function ComposeComponent(
         }
 
         return defaultsDeep(prev, cur.build(argsForBuild));
-      }, {}),
+      }, {});
+
+      const valid = this.validate(obj);
+
+      if (valid === true) {
+        return obj;
+      } else {
+        throw valid;
+      }
+    },
     marshall: (obj: object) =>
       components.reduce(
         (prev: object, cur: IComponent<any>) =>

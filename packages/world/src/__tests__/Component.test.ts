@@ -5,7 +5,7 @@ import { ComposeComponent, IComponent } from "../Component";
 const BaseComponent: IComponent<any> = {
   name: "base",
   schema: {
-    text: { type: "string" },
+    base: { type: "boolean" },
   },
   build: (_obj: any) => ({ base: true }),
   marshall: (_obj: any) => ({ base: true }),
@@ -27,7 +27,9 @@ const ThirdComponent: IComponent<any> = {
   schema: {
     third: { type: "boolean" },
   },
-  build: (obj: any) => obj,
+  build: (obj: any) => ({
+    third: true,
+  }),
   marshall: (obj: any) => obj,
   unmarshall: (obj: any) => obj,
 };
@@ -50,7 +52,7 @@ describe("ComposeComponent", () => {
       BaseComponent
     );
 
-    expect(component.schema.text.type).toBe("string");
+    expect(component.schema.base.type).toBe("boolean");
     expect(component.schema.third.type).toBe("boolean");
     expect(component.schema.second.type).toBe("boolean");
   });

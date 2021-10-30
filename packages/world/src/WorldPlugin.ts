@@ -13,7 +13,7 @@ export function WorldPlugin(_config: IConfiguration): IWorldPlugin {
   return {
     name: "world",
     world: {
-      services: { SessionService, EntityService, ComponentsService },
+      services: { SessionService, EntityService },
       controllers: {
         start: StartController,
         motd: MotdController,

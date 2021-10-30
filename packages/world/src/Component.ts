@@ -1,5 +1,8 @@
 import { last, defaultsDeep } from "lodash";
-import { ValidationSchema } from "fastest-validator";
+import FastestValidator, {
+  ValidationError,
+  ValidationSchema,
+} from "fastest-validator";
 import { GenericObject } from "moleculer";
 
 interface ICompositionMap {
@@ -13,6 +16,7 @@ export interface IComponent<Type> {
   marshall: (...args: any) => Type;
   unmarshall: (component: Type) => GenericObject;
   composedOf?: ICompositionMap;
+  validate?: (schema: ValidationSchema<any>) => true | ValidationError;
 }
 
 export function ComposeComponent(
@@ -26,11 +30,17 @@ export function ComposeComponent(
     name: last(components).name,
     composedOf: composedOf,
     build: (args: any = {}) =>
-      components.reduce(
-        (prev: object, cur: IComponent<any>) =>
-          defaultsDeep(prev, cur.build(args[cur.name])),
-        {}
-      ),
+      components.reduce((prev: object, cur: IComponent<any>) => {
+        let argsForBuild: any;
+
+        if (typeof args === "object") {
+          argsForBuild = args[cur.name];
+        } else {
+          argsForBuild = args;
+        }
+
+        return defaultsDeep(prev, cur.build(argsForBuild));
+      }, {}),
     marshall: (obj: object) =>
       components.reduce(
         (prev: object, cur: IComponent<any>) =>
@@ -45,5 +55,13 @@ export function ComposeComponent(
       ),
   };
 
-  return components.reduce((prev, cur) => defaultsDeep(prev, cur), base);
+  const component = components.reduce(
+    (prev, cur) => defaultsDeep(prev, cur),
+    base
+  );
+
+  const v = new FastestValidator();
+  component.validate = v.compile(component.schema);
+
+  return component;
 }

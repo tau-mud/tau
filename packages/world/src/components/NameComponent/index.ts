@@ -1,1 +1,0 @@
-export { NameComponent } from "./NameComponent";

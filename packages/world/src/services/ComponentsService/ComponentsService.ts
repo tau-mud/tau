@@ -10,7 +10,7 @@ export function ComponentsService(config: IWorldPlugin): ServiceSchema {
     settings: {
       host: config.redis.host,
       port: config.redis.port,
-      componentTypes: config.world.componentTypes,
+      componentTypes: config.world.components,
     },
   };
 }

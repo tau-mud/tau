@@ -1,6 +1,6 @@
 import { NameComponent, ContainerComponent } from "../";
 
-import { ComposeComponent, IComponent } from "../../Component";
+import { ComposeComponent, IComponent } from "../Component";
 
 export const AreaComponent = ComposeComponent(
   NameComponent,

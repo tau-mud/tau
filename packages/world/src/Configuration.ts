@@ -13,7 +13,7 @@ interface ITemplateMap {
 }
 
 interface IComponentMap {
-  [key: string]: IComponent;
+  [key: string]: IComponent<any>;
 }
 
 export interface IWorldOptions {

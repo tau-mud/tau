@@ -1,1 +1,0 @@
-export { AreaComponent } from "./AreaComponent";

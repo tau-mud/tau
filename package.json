@@ -13,5 +13,11 @@
     "clean": "lerna exec --parallel -- yarn clean",
     "watch": "lerna exec --parallel -- yarn watch",
     "build": "lerna exec --parallel -- yarn build"
-  }
+  },
+  "dependencies": {
+    "learna": "^1.0.1"
+  },
+  "workspaces": ["packages/*"],
+  "npmClient": "yarn",
+  "useWorkspaces": true
 }

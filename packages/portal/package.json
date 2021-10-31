@@ -37,7 +37,7 @@
     "typescript": "^4.4.4"
   },
   "dependencies": {
-    "@tau/core": "file:../core",
+    "@tau/core": "^0.0.0",
     "eventemitter2": "^6.4.5",
     "lodash": "^4.17.21",
     "moleculer": "^0.14.17",

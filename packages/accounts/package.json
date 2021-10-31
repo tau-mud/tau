@@ -38,9 +38,9 @@
     "typescript": "^4.4.4"
   },
   "dependencies": {
-    "@tau/core": "file:../core",
-    "@tau/portal": "file:../portal",
-    "@tau/world": "file:../world",
+    "@tau/core": "^0.0.0",
+    "@tau/portal": "^0.0.0",
+    "@tau/world": "^0.0.0",
     "bcrypt": "^5.0.1",
     "ink": "^3.2.0",
     "moleculer": "^0.14.17",

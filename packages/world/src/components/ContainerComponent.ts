@@ -1,4 +1,4 @@
-import { IComponent } from "../../Component";
+import { IComponent } from "../Component";
 
 interface IContainerComponent {
   items: Array<string>;

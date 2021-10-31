@@ -1,7 +1,7 @@
 import { ComposeComponent, IComponentSchema } from "../Component";
 
 const BaseComponent: IComponentSchema<any> = {
-  _name: "base",
+  name: "base",
   schema: {
     base: { type: "boolean" },
   },
@@ -11,7 +11,7 @@ const BaseComponent: IComponentSchema<any> = {
 };
 
 const SecondComponent: IComponentSchema<any> = {
-  _name: "base",
+  name: "base",
   schema: {
     second: { type: "boolean" },
   },
@@ -21,7 +21,7 @@ const SecondComponent: IComponentSchema<any> = {
 };
 
 const ThirdComponent: IComponentSchema<any> = {
-  _name: "base",
+  name: "base",
   schema: {
     third: { type: "boolean" },
   },
@@ -40,7 +40,7 @@ describe("ComposeComponent", () => {
       BaseComponent
     );
 
-    expect(component._name).toBe("base");
+    expect(component.name).toBe("base");
   });
 
   test("schema should be correct", () => {

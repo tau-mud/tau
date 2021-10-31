@@ -13,7 +13,7 @@ interface ICompositionMap {
  * Definition of a component.
  */
 export interface IComponentSchema<Type> {
-  _name: string;
+  name: string;
   schema: ValidationSchema<any>;
   build: (...args: any) => Type;
   marshall: (...args: any) => Type;
@@ -35,10 +35,10 @@ export function ComposeComponent(
 ): IComponentSchema<any> {
   const composedOf = {};
 
-  components.forEach((component) => (composedOf[component._name] = component));
+  components.forEach((component) => (composedOf[component.name] = component));
 
   const base = {
-    name: last(components)._name,
+    name: last(components).name,
     composedOf: composedOf,
     build(args: any = {}) {
       const obj = components.reduce(
@@ -46,7 +46,7 @@ export function ComposeComponent(
           let argsForBuild: any;
 
           if (typeof args === "object") {
-            argsForBuild = args[cur._name];
+            argsForBuild = args[cur.name];
           } else {
             argsForBuild = args;
           }

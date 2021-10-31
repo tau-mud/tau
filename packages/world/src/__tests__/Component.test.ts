@@ -1,5 +1,3 @@
-import FastestValidator from "fastest-validator";
-
 import { ComposeComponent, IComponent } from "../Component";
 
 const BaseComponent: IComponent<any> = {

@@ -1,4 +1,4 @@
-import { IComponent, ComposeComponent } from "../Component";
+import { IComponentSchema, ComposeComponent } from "../Component";
 
 interface INameComponent {
   name: string;
@@ -18,6 +18,6 @@ const component = {
   },
 };
 
-export const NameComponent = <IComponent<INameComponent>>(
+export const NameComponent = <IComponentSchema<INameComponent>>(
   ComposeComponent(component)
 );

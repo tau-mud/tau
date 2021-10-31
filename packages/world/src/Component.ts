@@ -6,10 +6,13 @@ import FastestValidator, {
 import { GenericObject } from "moleculer";
 
 interface ICompositionMap {
-  [key: string]: IComponent<any>;
+  [key: string]: IComponentSchema<any>;
 }
 
-export interface IComponent<Type> {
+/**
+ * Definition of a component.
+ */
+export interface IComponentSchema<Type> {
   name: string;
   schema: ValidationSchema<any>;
   build: (...args: any) => Type;
@@ -19,9 +22,17 @@ export interface IComponent<Type> {
   validate?: (schema: ValidationSchema<any>) => true | ValidationError;
 }
 
+/**
+ * Creates a new Component from a provided set of IComponentSchema.
+ *
+ * @param {Array<IComponentSchema<any>} components - the schmea from which to combine a single full
+ * component schema.
+ *
+ * @return {IComponentSchema<any>}
+ */
 export function ComposeComponent(
-  ...components: Array<IComponent<any>>
-): IComponent<any> {
+  ...components: Array<IComponentSchema<any>>
+): IComponentSchema<any> {
   const composedOf = {};
 
   components.forEach((component) => (composedOf[component.name] = component));
@@ -30,17 +41,20 @@ export function ComposeComponent(
     name: last(components).name,
     composedOf: composedOf,
     build(args: any = {}) {
-      const obj = components.reduce((prev: object, cur: IComponent<any>) => {
-        let argsForBuild: any;
+      const obj = components.reduce(
+        (prev: object, cur: IComponentSchema<any>) => {
+          let argsForBuild: any;
 
-        if (typeof args === "object") {
-          argsForBuild = args[cur.name];
-        } else {
-          argsForBuild = args;
-        }
+          if (typeof args === "object") {
+            argsForBuild = args[cur.name];
+          } else {
+            argsForBuild = args;
+          }
 
-        return defaultsDeep(prev, cur.build(argsForBuild));
-      }, {});
+          return defaultsDeep(prev, cur.build(argsForBuild));
+        },
+        {}
+      );
 
       const valid = this.validate(obj);
 
@@ -52,13 +66,13 @@ export function ComposeComponent(
     },
     marshall: (obj: object) =>
       components.reduce(
-        (prev: object, cur: IComponent<any>) =>
+        (prev: object, cur: IComponentSchema<any>) =>
           defaultsDeep(prev, cur.marshall(obj)),
         {}
       ),
     unmarshall: (obj: object) =>
       components.reduce(
-        (prev: object, cur: IComponent<any>) =>
+        (prev: object, cur: IComponentSchema<any>) =>
           defaultsDeep(prev, cur.unmarshall(obj)),
         {}
       ),

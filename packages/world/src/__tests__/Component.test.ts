@@ -1,6 +1,6 @@
-import { ComposeComponent, IComponent } from "../Component";
+import { ComposeComponent, IComponentSchema } from "../Component";
 
-const BaseComponent: IComponent<any> = {
+const BaseComponent: IComponentSchema<any> = {
   name: "base",
   schema: {
     base: { type: "boolean" },
@@ -10,7 +10,7 @@ const BaseComponent: IComponent<any> = {
   unmarshall: (_obj: any) => ({ base: true }),
 };
 
-const SecondComponent: IComponent<any> = {
+const SecondComponent: IComponentSchema<any> = {
   name: "base",
   schema: {
     second: { type: "boolean" },
@@ -20,7 +20,7 @@ const SecondComponent: IComponent<any> = {
   unmarshall: (_obj: any) => ({ second: true }),
 };
 
-const ThirdComponent: IComponent<any> = {
+const ThirdComponent: IComponentSchema<any> = {
   name: "base",
   schema: {
     third: { type: "boolean" },

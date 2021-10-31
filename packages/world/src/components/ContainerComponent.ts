@@ -1,10 +1,10 @@
-import { IComponent } from "../Component";
+import { IComponentSchema } from "../Component";
 
 interface IContainerComponent {
   items: Array<string>;
 }
 
-export const ContainerComponent: IComponent<IContainerComponent> = {
+export const ContainerComponent: IComponentSchema<IContainerComponent> = {
   name: "container",
   schema: {
     items: { type: "array", items: "string", default: [] },

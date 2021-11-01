@@ -1,6 +1,6 @@
-import { ComposeComponent, IComponentSchema } from "../Component";
+import { ComposeComponent, TGenericComponentSchema } from "../Component";
 
-const BaseComponent: IComponentSchema<any> = {
+const BaseComponent: TGenericComponentSchema = {
   name: "base",
   schema: {
     base: { type: "boolean" },
@@ -10,7 +10,7 @@ const BaseComponent: IComponentSchema<any> = {
   unmarshall: (_obj: any) => ({ base: true }),
 };
 
-const SecondComponent: IComponentSchema<any> = {
+const SecondComponent: TGenericComponentSchema = {
   name: "base",
   schema: {
     second: { type: "boolean" },
@@ -20,7 +20,7 @@ const SecondComponent: IComponentSchema<any> = {
   unmarshall: (_obj: any) => ({ second: true }),
 };
 
-const ThirdComponent: IComponentSchema<any> = {
+const ThirdComponent: TGenericComponentSchema = {
   name: "base",
   schema: {
     third: { type: "boolean" },
@@ -62,7 +62,7 @@ describe("ComposeComponent", () => {
       BaseComponent
     );
 
-    const res = component.build();
+    const res = component.build({});
 
     expect(res.first);
     expect(res.second);
@@ -75,7 +75,7 @@ describe("ComposeComponent", () => {
       BaseComponent
     );
 
-    const res = component.marshall();
+    const res = component.marshall({});
 
     expect(res.first);
     expect(res.second);

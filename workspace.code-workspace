@@ -1,0 +1,13 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "../taumud"
+    }
+  ],
+  "settings": {
+    "prettier.documentSelectors": ["*.js"]
+  }
+}

@@ -1,10 +1,28 @@
 import { IComponentSchema, ComposeComponent } from "../Component";
 
-interface INameComponent {
+export interface INameComponent {
+  /**
+   * The name of the component.
+   */
   name: string;
 }
 
-const component = {
+export interface INameComponentSchema
+  extends IComponentSchema<INameComponent, INameComponentSchema> {
+  /**
+   * Builds a name component.
+   *
+   * @param {string} name - the name of the entity this component is attached to
+   *
+   * @return {INameComponent}
+   */
+  build: (name: string) => INameComponent;
+}
+
+/**
+ * Defines a name for the component.
+ */
+export const NameComponent = ComposeComponent({
   name: "name",
   schema: {
     name: { type: "string" },
@@ -16,8 +34,4 @@ const component = {
       name: component.name,
     };
   },
-};
-
-export const NameComponent = <IComponentSchema<INameComponent>>(
-  ComposeComponent(component)
-);
+});

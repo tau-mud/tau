@@ -1,14 +1,11 @@
 {
-  "name": "@tau/utils",
+  "name": "@tau/example",
   "version": "0.0.0",
-  "description": "TauJS Utils",
-  "keywords": [
-    "mud"
-  ],
+  "description": "Tau MUD Engine Example Game",
   "author": "Jarod <therealfugu@gmail.com>",
   "homepage": "https://github.com/tau-mud/tau#readme",
   "license": "ISC",
-  "main": "lib/index.js",
+  "main": "lib/example.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -24,20 +21,9 @@
     "url": "git+https://github.com/tau-mud/tau.git"
   },
   "scripts": {
-    "clean": "rm -rf lib/**; mkdir lib",
-    "build": "tsc -p tsconfig.build.json",
-    "watch": "tsc --watch -p tsconfig.build.json",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/tau-mud/tau/issues"
-  },
-  "devDependencies": {
-    "@types/jest": "^27.0.2",
-    "@types/node": "^16.11.6",
-    "jest": "^27.3.1",
-    "prettier": "^2.4.1",
-    "ts-jest": "^27.0.7",
-    "typescript": "^4.4.4"
   }
 }

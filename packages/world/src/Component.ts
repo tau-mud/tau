@@ -3,21 +3,19 @@ import FastestValidator, {
   ValidationError,
   ValidationSchema,
 } from "fastest-validator";
-import { GenericObject } from "moleculer";
+
+export type TGenericComponentSchema = IComponentSchema<any, any>;
 
 interface ICompositionMap {
-  [key: string]: IComponentSchema<any>;
+  [key: string]: TGenericComponentSchema;
 }
 
-/**
- * Definition of a component.
- */
-export interface IComponentSchema<Type> {
+export interface IComponentSchema<ComponentType, UnmarshalledType> {
   name: string;
   schema: ValidationSchema<any>;
-  build: (...args: any) => Type;
-  marshall: (...args: any) => Type;
-  unmarshall: (component: Type) => GenericObject;
+  build: (args?: any) => ComponentType;
+  marshall: (obj: UnmarshalledType) => ComponentType;
+  unmarshall: (component: ComponentType) => UnmarshalledType;
   composedOf?: ICompositionMap;
   validate?: (schema: ValidationSchema<any>) => true | ValidationError;
 }
@@ -30,9 +28,9 @@ export interface IComponentSchema<Type> {
  *
  * @return {IComponentSchema<any>}
  */
-export function ComposeComponent(
-  ...components: Array<IComponentSchema<any>>
-): IComponentSchema<any> {
+export function ComposeComponent<T extends TGenericComponentSchema>(
+  ...components: Array<TGenericComponentSchema>
+): T {
   const composedOf = {};
 
   components.forEach((component) => (composedOf[component.name] = component));
@@ -42,7 +40,7 @@ export function ComposeComponent(
     composedOf: composedOf,
     build(args: any = {}) {
       const obj = components.reduce(
-        (prev: object, cur: IComponentSchema<any>) => {
+        (prev: object, cur: TGenericComponentSchema) => {
           let argsForBuild: any;
 
           if (typeof args === "object") {
@@ -66,13 +64,13 @@ export function ComposeComponent(
     },
     marshall: (obj: object) =>
       components.reduce(
-        (prev: object, cur: IComponentSchema<any>) =>
+        (prev: object, cur: TGenericComponentSchema) =>
           defaultsDeep(prev, cur.marshall(obj)),
         {}
       ),
     unmarshall: (obj: object) =>
       components.reduce(
-        (prev: object, cur: IComponentSchema<any>) =>
+        (prev: object, cur: TGenericComponentSchema) =>
           defaultsDeep(prev, cur.unmarshall(obj)),
         {}
       ),

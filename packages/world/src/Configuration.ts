@@ -1,6 +1,6 @@
 import { IServiceMap } from "@tau/core";
 
-import { IComponent } from "./Component";
+import { TGenericComponentSchema } from "./Component";
 import { IController } from "./Controller";
 import { ITemplate } from "./Template";
 
@@ -13,7 +13,7 @@ interface ITemplateMap {
 }
 
 interface IComponentMap {
-  [key: string]: IComponent<any>;
+  [key: string]: TGenericComponentSchema;
 }
 
 export interface IWorldOptions {

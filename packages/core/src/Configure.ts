@@ -51,9 +51,9 @@ export function Configure(
       options: {
         redis: {
           host: config.redis.host,
-          port: config.redis.port
-        }
-      }
+          port: config.redis.port,
+        },
+      },
     },
     serializer: "JSON",
     requestTimeout: 10 * 1000,

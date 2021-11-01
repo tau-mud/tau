@@ -11,6 +11,7 @@
   },
   "scripts": {
     "run": "lerna",
+    "portal:start": "lerna exec --scope @tau/example yarn portal:start",
     "clean": "lerna exec --parallel -- yarn clean",
     "watch": "lerna exec --parallel -- yarn watch",
     "build": "lerna exec --parallel -- yarn build"

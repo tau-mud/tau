@@ -97,6 +97,12 @@ export function Session(params: IConnectionSettings): ISessionSchema {
         ctx.call(serviceEndpoint(this.settings, "puts"), ctx.params);
       },
       /**
+       * Print prints the cotnent to the connection. It does not add a newline on its own.
+       */
+      print(ctx: Context<IPutsParams>) {
+        ctx.call(serviceEndpoint(this.settings, "print"), ctx.params);
+      },
+      /**
        * Returns the currently active controller. If no controller has been set for this
        * Session, then the `start` controller is returned.
        *
@@ -224,7 +230,7 @@ export function Session(params: IConnectionSettings): ISessionSchema {
               { stdout: buffer }
             );
 
-            return this.actions.puts({ message: buffer.get() });
+            return this.actions.print({ message: buffer.get() });
           });
       },
     },

@@ -10,12 +10,16 @@
       "name": "Portal",
       "skipFiles": ["<node_internals>/**"],
       "program": "./node_modules/moleculer/bin/moleculer-runner",
-      "args": [
-        "--hot",
-        "--repl",
-        "-c",
-        "packages/example/lib/portal.config.js"
-      ],
+      "args": ["--repl", "-c", "packages/example/lib/portal.config.js"],
+      "outFiles": ["${workspaceFolder}/**/*.js"]
+    },
+    {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "World",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "./node_modules/moleculer/bin/moleculer-runner",
+      "args": ["--repl", "-c", "packages/example/lib/world.config.js"],
       "outFiles": ["${workspaceFolder}/**/*.js"]
     }
   ]

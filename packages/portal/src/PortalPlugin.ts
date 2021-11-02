@@ -1,4 +1,4 @@
-import { IPlugin, IConfiguration, TService } from "@tau/core";
+import { IPlugin, IConfiguration } from "@tau/core";
 
 import { PortalService } from "./services/PortalService";
 

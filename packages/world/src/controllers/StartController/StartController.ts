@@ -2,6 +2,9 @@ import { IMessageContext } from "@tau/portal";
 
 import { ISessionContext } from "../../services/SessionService";
 
+/**
+ * The `StartController` is called as soon as a new session is started.
+ */
 export const StartController = {
   name: "start",
   resume(_context: ISessionContext) {

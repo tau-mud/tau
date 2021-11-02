@@ -6,6 +6,9 @@ import { Session } from "./Session";
 
 interface ISessionsSchema extends ServiceSchema {}
 
+/**
+ * The `SessionService` provides the interactivity in the game world, proxying data to and from the player connection.
+ */
 export function SessionService(_config: IConfiguration): ISessionsSchema {
   return {
     name: "tau.sessions",

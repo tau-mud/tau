@@ -1,7 +1,8 @@
-import { TService, IPlugin } from "@tau/core";
+import { ServiceSchema } from "moleculer";
+import { IPlugin } from "@tau/core";
 
 export interface IPortalOptions {
-  services: Array<TService>;
+  services: Array<ServiceSchema>;
 }
 
 export interface IPortalConfig extends IPlugin {

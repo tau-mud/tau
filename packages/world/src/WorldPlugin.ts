@@ -9,11 +9,14 @@ export interface IWorldPlugin extends IPlugin {
   world: IWorldOptions;
 }
 
+/**
+ * The World provides the actual game world content.
+ */
 export function WorldPlugin(_config: IConfiguration): IWorldPlugin {
   return {
     name: "world",
     world: {
-      services: {},
+      services: { SessionService, EntityService },
       controllers: {
         start: StartController,
         motd: MotdController,

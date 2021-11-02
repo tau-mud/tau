@@ -21,8 +21,8 @@
     "url": "git+https://github.com/tau-mud/tau.git"
   },
   "scripts": {
-    "portal:start": "npx ts-node ./node_modules/.bin/moleculer-runner --repl --hot -c lib/portal.config.js",
-    "world:start": "npx ts-node ./node_modules/moleculer/bin/moleculer-runner.js --repl --hot -c dist/world.config.js",
+    "portal:start": "npx ts-node ./node_modules/.bin/moleculer-runner --repl -c lib/portal.config.js",
+    "world:start": "npx ts-node ./node_modules/.bin/moleculer-runner --repl -c lib/world.config.js",
     "clean": "rm -rf lib/**",
     "watch": "tsc --watch -p tsconfig.build.json",
     "build": "tsc -p tsconfig.build.json",

@@ -10,7 +10,7 @@
       "name": "Portal",
       "skipFiles": ["<node_internals>/**"],
       "program": "./node_modules/moleculer/bin/moleculer-runner",
-      "args": ["--repl", "-c", "packages/example/lib/portal.config.js"],
+      "args": ["-c", "packages/example/lib/portal.config.js"],
       "outFiles": ["${workspaceFolder}/**/*.js"]
     },
     {
@@ -19,7 +19,7 @@
       "name": "World",
       "skipFiles": ["<node_internals>/**"],
       "program": "./node_modules/moleculer/bin/moleculer-runner",
-      "args": ["--repl", "-c", "packages/example/lib/world.config.js"],
+      "args": ["-c", "packages/example/lib/world.config.js"],
       "outFiles": ["${workspaceFolder}/**/*.js"]
     }
   ]

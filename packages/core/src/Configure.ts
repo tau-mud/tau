@@ -8,15 +8,21 @@ import { defaultsDeep, get } from "lodash";
 
 import { TPlugin } from "./Plugin";
 
+// Redis configuration
 interface IRedisConfig {
   host: string;
   port: string;
 }
 
+// Base configuration
 export interface IConfiguration {
+  // List of plugins to load
   plugins?: Array<TPlugin>;
+  // Services to load
   services?: Array<ServiceSchema>;
+  // Template registry
   templates?: Array<any>;
+  // Redis configuration
   redis: IRedisConfig;
 }
 

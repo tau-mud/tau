@@ -1,20 +1,36 @@
-import Redis from "moleculer-redis";
-import { ServiceSchema } from "moleculer";
+import {Context, ServiceSchema} from "moleculer";
+import {IConfiguration} from "@tau/core/lib/Configure";
+import DbService from "moleculer-db";
 
-import { IConfiguration } from "@tau/core";
+interface IEntityServiceSchema extends ServiceSchema {
+}
 
-interface IEntityServiceSchema extends ServiceSchema {}
+export function EntityService(_config: IConfiguration): IEntityServiceSchema {
+    return {
+        name: "tau.entities",
+        mixins: [DbService],
 
-/**
- * The EntityService is responsible for tracking and indexing all entities
- */
-export function EntityService(config: IConfiguration): IEntityServiceSchema {
-  return {
-    name: "tau.world.entities",
-    settings: {
-      host: config.redis.host,
-      port: config.redis.port,
-    },
-    mixins: [Redis],
-  };
+        settings: {
+            fields: ["_id", "components", "data"]
+        },
+
+        actions: {
+            create: {
+                rest: "POST /entities",
+                handler(ctx: Context<any, any>): Promise<any> {
+                    const components = Object.keys(ctx.params)
+                    return this._create(ctx, {...ctx.params, components})
+                }
+            },
+            update: {
+                rest: "PUT /:id",
+                handler(ctx: Context<any, any>): Promise<any> {
+                    const components = Object.keys(ctx.params)
+                    return this._update(ctx, {...ctx.params, components})
+                }
+            }
+        }
+
+
+    }
 }

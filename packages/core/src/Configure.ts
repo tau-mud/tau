@@ -167,6 +167,8 @@ function loadServices(
     ...processServices,
   };
 
+  console.log(services)
+
   Object.values(services).forEach((PluginService: any) => {
     const service = new PluginService(config);
     broker.logger.info(`loading sesrvice '${service.name}'`);

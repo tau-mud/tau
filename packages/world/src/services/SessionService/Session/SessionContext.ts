@@ -1,6 +1,7 @@
-import { Service, GenericObject } from "moleculer";
+import { Service, GenericObject, LoggerInstance } from "moleculer";
 
 export interface ISessionContext {
+  logger: LoggerInstance;
   puts: (message: string) => Promise<any>;
   render: (template: string, context?: GenericObject) => Promise<any>;
   setController: (controller: string) => Promise<any>;
@@ -11,6 +12,7 @@ export interface ISessionContext {
 
 export function SessionContext(session: Service): ISessionContext {
   return {
+    logger: session.logger,
     puts(message: string): Promise<any> {
       return session.actions.puts({ message: message });
     },

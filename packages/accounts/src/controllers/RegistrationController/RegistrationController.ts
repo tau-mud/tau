@@ -94,6 +94,13 @@ async function handleInput(context: ISessionContext, message: IMessageContext) {
           )
           .then(async (valid: boolean) => {
             if (valid) {
+              context.logger.info("HERE");
+
+              const afc = await context.call("tau.config.getValue", {
+                key: "after_signin_controller",
+              });
+
+              return context.setController(afc);
             } else {
               return context
                 .setInFlash("step", 2)

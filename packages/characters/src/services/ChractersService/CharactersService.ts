@@ -4,7 +4,7 @@ import DbService from "moleculer-db";
 import MongooseAdapter from "moleculer-db-adapter-mongoose";
 import { model, Schema } from "mongoose";
 
-interface IValidateNameParams {
+interface INameParams {
   name: string;
 }
 
@@ -24,7 +24,7 @@ export function CharactersService(
       })
     ),
     actions: {
-      validateName(ctx: Context<IValidateNameParams>) {
+      validateName(ctx: Context<INameParams>) {
         if (ctx.params.name.length < 4) {
           return Promise.resolve({
             valid: false,
@@ -63,7 +63,6 @@ export function CharactersService(
             } else {
               return Promise.resolve({
                 valid: true,
-                message: "nameValid",
               });
             }
           });

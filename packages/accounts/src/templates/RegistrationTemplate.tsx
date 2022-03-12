@@ -195,7 +195,7 @@ export const RegistrationTemplate = {
       <Box>
         <Text>
           <Text>The username &apos;</Text>
-          <Text color="cyan" bold>
+          <Text color="green" bold>
             {context.username}
           </Text>
           <Text>&apos; has already been taken</Text>

@@ -162,6 +162,7 @@ export function Session(params: IConnectionSettings): ISessionSchema {
           .then((controller: IController) => {
             return this.actions
               .setInStore({ key: "controller", value: controller.name })
+              .then(() => this.resetFlash())
               .then(() => controller);
           })
           .then(() => this.actions.startCurrentController());
@@ -248,6 +249,9 @@ export function Session(params: IConnectionSettings): ISessionSchema {
       },
       setInFlash(key: string, value: any) {
         return this.actions.setInStore({ key: `flash.${key}`, value });
+      },
+      resetFlash() {
+        return this.actions.setInStore({ key: "flash", value: {} });
       },
     },
   };

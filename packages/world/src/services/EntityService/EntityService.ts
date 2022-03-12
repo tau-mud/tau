@@ -4,6 +4,10 @@ import DbService from "moleculer-db";
 
 interface IEntityServiceSchema extends ServiceSchema {}
 
+export interface IEntity {
+  id: string;
+}
+
 export function EntityService(_config: IConfiguration): IEntityServiceSchema {
   return {
     name: "tau.entities",

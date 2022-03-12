@@ -1,1 +1,1 @@
-export { EntityService } from "./EntityService";
+export { EntityService, IEntity } from "./EntityService";

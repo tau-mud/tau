@@ -6259,8 +6259,10 @@ moleculer-repl@^0.6.4, moleculer-repl@^0.6.6:
     table "^6.7.1"
     tiny-human-time "^1.2.0"
 
-moleculer@^0.14.0, moleculer@^0.14.17, moleculer@^0.14.18, moleculer@^0.14.5, "moleculer@file:../../moleculer":
+moleculer@^0.14.0, moleculer@^0.14.17, moleculer@^0.14.18, moleculer@^0.14.5:
   version "0.14.19"
+  resolved "https://registry.yarnpkg.com/moleculer/-/moleculer-0.14.19.tgz#7fda6ace5e5394eeff0c31e0a93c0389ac95684f"
+  integrity sha512-XtZwfYHk2xP6mnTEf2h44OPh/ha0jMqK4bCCROMNRdngBZR2i3LKruZA1SeHUBW+1HtDh2GliAEG7a0rW9VZhg==
   dependencies:
     args "^5.0.1"
     eventemitter2 "^6.4.5"
@@ -6270,7 +6272,7 @@ moleculer@^0.14.0, moleculer@^0.14.17, moleculer@^0.14.18, moleculer@^0.14.5, "m
     kleur "^4.1.4"
     lodash "^4.17.21"
     lru-cache "^6.0.0"
-    node-fetch "^2.6.7"
+    node-fetch "^2.6.1"
     recursive-watch "^1.1.4"
 
 mongodb@3.4.1:

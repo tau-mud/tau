@@ -29,7 +29,6 @@
   "bugs": {
     "url": "https://github.com/tau-mud/tau/issues"
   },
-
   "devDependencies": {
     "@types/jest": "^27.0.2",
     "@types/lodash": "^4.14.175",
@@ -42,6 +41,8 @@
   "dependencies": {
     "@tau/core": "^0.0.0",
     "@tau/utils": "^0.0.0",
+    "@tau/world": "^0.0.0",
+    "lodash": "^4.17.21",
     "moleculer": "^0.14.17"
   },
   "types": "./lib/index.d.ts"

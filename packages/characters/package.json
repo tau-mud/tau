@@ -1,0 +1,48 @@
+{
+  "name": "@tau/characters",
+  "version": "0.0.0",
+  "description": "Tau MUD Engine Character Plugin",
+  "author": "Jarod <therealfugu@gmail.com>",
+  "homepage": "https://github.com/tau-mud/tau#readme",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tau-mud/tau.git"
+  },
+  "scripts": {
+    "clean": "rm -rf lib/**; mkdir lib",
+    "build": "tsc -p tsconfig.build.json",
+    "watch": "tsc --watch -p tsconfig.build.json",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/tau-mud/tau/issues"
+  },
+
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "@types/lodash": "^4.14.175",
+    "@types/node": "^16.11.0",
+    "@types/react": "^17.0.30",
+    "jest": "^27.3.1",
+    "ts-jest": "^27.0.7",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "@tau/core": "^0.0.0",
+    "@tau/utils": "^0.0.0",
+    "moleculer": "^0.14.17"
+  },
+  "types": "./lib/index.d.ts"
+}

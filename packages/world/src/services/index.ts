@@ -1,2 +1,2 @@
-export {SessionService} from "./SessionService";
-export {EntityService} from "./EntityService";
+export { SessionService } from "./SessionService";
+export { EntityService } from "./EntityService";

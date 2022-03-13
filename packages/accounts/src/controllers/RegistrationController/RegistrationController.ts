@@ -111,7 +111,7 @@ async function handleInput(context: ISessionContext, message: IMessageContext) {
                 .then((account) => context.setInStore("accountId", account.id))
                 .then(() =>
                   context.call("tau.config.getValue", {
-                    key: "after_login_controller",
+                    key: "afterLoginController",
                   })
                 )
                 .then((alc) => context.setController(alc));

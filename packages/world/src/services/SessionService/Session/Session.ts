@@ -191,12 +191,18 @@ export function Session(params: IConnectionSettings): ISessionSchema {
        */
       handleInput(ctx: Context<IMessageContext>) {
         this.logger.debug("handling input");
-        return this.actions.getController().then((controller: IController) => {
-          this.logger.debug(
-            `received input from connection, passing to '${controller.name}' controller`
-          );
-          return controller.handleInput(SessionContext(this), ctx.params);
-        });
+        return this.actions
+          .getController()
+          .then((controller: IController) => {
+            this.logger.debug(
+              `received input from connection, passing to '${controller.name}' controller`
+            );
+            return controller.handleInput(SessionContext(this), ctx.params);
+          })
+          .catch((error) => {
+            this.logger.error(error);
+            this.actions.puts("Uh oh. Something went terribly wrong.");
+          });
       },
       /**
        * Renders the react element to the player `Connection`.

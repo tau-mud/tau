@@ -14,7 +14,6 @@ export const CreateCharacterController = {
 
 async function renderStep(context: ISessionContext): Promise<void> {
   return context.getFromFlash("step", 0).then(async (step: number) => {
-    console.log(step);
     switch (step) {
       case 0:
         return context.render("createCharacter.promptCharacterName");

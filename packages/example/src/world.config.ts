@@ -8,7 +8,7 @@ const config: TBrokerOptions = Configure(
   "world",
   defaultsDeep(baseConfig, {
     database: "mongodb://localhost:27017",
-    after_signin_controller: "createCharacter",
+    afterLoginController: "createCharacter",
   })
 );
 

@@ -14,4 +14,18 @@ export const LoginTemplate = {
       </Box>
     );
   },
+  password() {
+    return (
+      <Box>
+        <Text>Enter your account's password:</Text>
+      </Box>
+    );
+  },
+  invalidCredentials() {
+    return (
+      <Box>
+        <Text>Invalid credentials. Please try again.</Text>
+      </Box>
+    );
+  },
 };

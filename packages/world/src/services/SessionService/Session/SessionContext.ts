@@ -7,6 +7,8 @@ export interface ISessionContext {
   setController: (controller: string) => Promise<any>;
   setInFlash: (key: string, value: any) => Promise<any>;
   getFromFlash: (key: string, defaultValue?: any) => Promise<any>;
+  setInStore: (key: string, value: any) => Promise<any>;
+  getFromStore: (key: string, defaultValue?: any) => Promise<any>;
   call: (endpoint: string, args: GenericObject) => Promise<any>;
 }
 
@@ -16,8 +18,8 @@ export function SessionContext(session: Service): ISessionContext {
     puts(message: string): Promise<any> {
       return session.actions.puts({ message: message });
     },
-    async render(template: string, context: GenericObject = {}): Promise<any> {
-      session.actions.renderTemplate({ template, context });
+    render(template: string, context: GenericObject = {}): Promise<any> {
+      return session.actions.renderTemplate({ template, context });
     },
     setInFlash(key: string, value: string): Promise<any> {
       return session.setInFlash(key, value);
@@ -25,11 +27,21 @@ export function SessionContext(session: Service): ISessionContext {
     getFromFlash(key: string, defaultValue: any = null): Promise<any> {
       return session.getFromFlash(key, defaultValue);
     },
+    setInStore(key: string, value: string): Promise<any> {
+      return session.actions.setInStore({ key, value });
+    },
+    getFromStore(key: string, defaultValue: any = null): Promise<any> {
+      return session.actions.getFromStore({ key, defaultValue });
+    },
     setController(controller: string): Promise<any> {
       return session.actions.setController({ controller });
     },
     call(endpoint: string, args: GenericObject) {
-      return session.broker.call(endpoint, args);
+      return session.broker.call(endpoint, args).catch((err) => {
+        session.logger.error(err);
+        this.puts("Uh oh. Something went terribly wrong.");
+        throw err;
+      });
     },
   };
 }

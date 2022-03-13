@@ -1,6 +1,7 @@
 import { IMessageContext } from "@tau/portal";
 import { ISessionContext } from "@tau/world";
 import { hash, compare } from "bcrypt";
+import { has } from "lodash";
 
 export const RegistrationController = {
   name: "registration",
@@ -87,20 +88,33 @@ async function handleInput(context: ISessionContext, message: IMessageContext) {
             }
           });
       case 3:
+        let encryptedPassword: string;
         return context
           .getFromFlash("hashedPassword")
-          .then((hashedPassword: string) =>
-            compare(message.message, hashedPassword)
-          )
-          .then(async (valid: boolean) => {
+          .then((hashedPassword: string) => {
+            encryptedPassword = hashedPassword;
+            return compare(message.message, hashedPassword);
+          })
+          .then((valid: boolean) => {
             if (valid) {
-              context.logger.info("HERE");
+              return context
+                .getFromFlash("username")
+                .then((username: string) => {
+                  const normalizedUsername = username.toLowerCase();
 
-              const afc = await context.call("tau.config.getValue", {
-                key: "after_signin_controller",
-              });
-
-              return context.setController(afc);
+                  return context.call("tau.accounts.create", {
+                    username,
+                    normalizedUsername,
+                    encryptedPassword,
+                  });
+                })
+                .then((account) => context.setInStore("accountId", account.id))
+                .then(() =>
+                  context.call("tau.config.getValue", {
+                    key: "after_login_controller",
+                  })
+                )
+                .then((alc) => context.setController(alc));
             } else {
               return context
                 .setInFlash("step", 2)

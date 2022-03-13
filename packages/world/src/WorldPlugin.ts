@@ -9,6 +9,13 @@ export interface IWorldPlugin extends IPlugin {
   world: IWorldOptions;
 }
 
+// Hackery to get around stupidness in Yoga
+const proc: any = process;
+
+const defaultFunction = proc._events.uncaughtException[0];
+process.removeAllListeners("uncaughtException");
+process.on("uncaughtException", defaultFunction);
+
 /**
  * The World provides the actual game world content.
  */

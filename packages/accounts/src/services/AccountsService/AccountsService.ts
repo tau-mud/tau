@@ -23,7 +23,7 @@ export function AccountsService(config: IAccountsConfiguration) {
       "Account",
       Schema({
         username: { type: String },
-        normalizedUsername: { type: String },
+        normalizedUsername: { type: String, unique: true, index: true },
         encryptedPassword: { type: String },
       })
     ),

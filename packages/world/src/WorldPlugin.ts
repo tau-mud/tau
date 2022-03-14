@@ -5,24 +5,24 @@ import { MotdTemplate } from "./templates";
 import { SessionService, EntityService } from "./services";
 import { IWorldOptions } from "./Configuration";
 
-export interface IWorldPlugin extends IPlugin {
-  world: IWorldOptions;
-}
-
-// Hackery to get around stupidness in Yoga
-const proc: any = process;
-
-const defaultFunction = proc._events.uncaughtException[0];
-process.removeAllListeners("uncaughtException");
-process.on("uncaughtException", defaultFunction);
-
 /**
- * The World provides the actual game world content.
+ * The World plugin is one of the two primary plugins that make up a Tau based game. It handles all interactions between
+ * the player and the game world. This plugin should be loaded after `@tau/core` and before any other plugins
+ * excepting `@tau/portal`.
  */
-export function WorldPlugin(_config: IConfiguration): IWorldPlugin {
-  return {
-    name: "world",
-    world: {
+export class WorldPlugin {
+  /**
+   * @private
+   */
+  public get name(): String {
+    return "world";
+  }
+
+  /**
+   * @private
+   */
+  public get world(): IWorldOptions {
+    return {
       services: { SessionService, EntityService },
       controllers: {
         start: StartController,
@@ -31,6 +31,6 @@ export function WorldPlugin(_config: IConfiguration): IWorldPlugin {
       templates: {
         motd: MotdTemplate,
       },
-    },
-  };
+    };
+  }
 }

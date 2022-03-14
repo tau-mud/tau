@@ -1,14 +1,13 @@
 import React, { ReactElement } from "react";
 
 import { IMessageContext, IConnectionSettings, IPutsParams } from "@tau/portal";
-
-import { GenericObject, Context, ServiceSchema } from "moleculer";
 import { render } from "ink";
+import { GenericObject, Context, ServiceSchema } from "moleculer";
 
 import { SessionContext } from "./SessionContext";
 import { RenderBuffer } from "./RenderBuffer";
 import { IController } from "../../../Controller";
-import { TTemplate } from "../../../Template";
+import { TTemplateFunction } from "../../../Template";
 
 interface ISetInStoreParams {
   key: string;
@@ -134,10 +133,18 @@ export function Session(params: IConnectionSettings): ISessionSchema {
        * @actions
        */
       startCurrentController() {
-        this.actions.getController().then((controller: IController) => {
-          this.logger.debug(`starting '${controller.name}'`);
-          controller.start(SessionContext(this));
-        });
+        this.actions
+          .getController()
+          .then((controller: IController) => {
+            this.logger.debug(`starting '${controller.name}'`);
+            return controller.start(SessionContext(this));
+          })
+          .catch((err) => {
+            this.logger.error(err);
+            this.actions.puts({
+              message: "Uh oh. Something went terribly wrong!",
+            });
+          });
       },
       /**
        * Resumes the currently set controller.
@@ -226,7 +233,7 @@ export function Session(params: IConnectionSettings): ISessionSchema {
           .call("tau.config.getValue", {
             key: `world.templates.${ctx.params.template}`,
           })
-          .then((template: TTemplate) => {
+          .then((template: TTemplateFunction) => {
             if (template) {
               this.logger.debug(`building template '${ctx.params.template}'`);
               return template(ctx.params.context);
@@ -240,11 +247,16 @@ export function Session(params: IConnectionSettings): ISessionSchema {
             );
             const buffer = RenderBuffer();
 
-            render(
+            // Hackery to get around stupidness in Yoga
+            const proc: any = process;
+
+            const { cleanup } = render(
               view,
               // @ts-ignore
-              { stdout: buffer }
+              { stdout: buffer, patchConsole: false }
             );
+
+            cleanup();
 
             return this.actions.print({ message: buffer.get() });
           });

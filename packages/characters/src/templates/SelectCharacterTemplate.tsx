@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box, Text } from "ink";
+import { Box, Text, Newline } from "ink";
 
 import { ICharacter } from "../services";
 
@@ -15,12 +15,21 @@ export const SelectCharacterTemplate = {
         </Text>
       </Box>
     ));
+
+    return (
+      <Box flexDirection="column">
+        <Text>Select a character:</Text>
+        <Box marginLeft={3} marginTop={1}>
+          {characters}
+        </Box>
+      </Box>
+    );
+  },
+
+  selectionInvalid() {
     return (
       <Box>
-        <Box>
-          <Text>Select a character:</Text>
-        </Box>
-        <Box>{characters}</Box>
+        <Text>That is not a valid selection.</Text>
       </Box>
     );
   },

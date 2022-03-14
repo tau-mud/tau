@@ -16,9 +16,6 @@ export const MotdTemplate = {
         <Box>
           <Text color="green">TAU MUD ENGINE</Text>
         </Box>
-        <Box>
-          <Text>"Just likem mom used to make!"</Text>
-        </Box>
       </Box>
     );
   },

@@ -51,6 +51,7 @@ export function Connection(socket: Socket): IConnectionSchema {
       },
       print(ctx: Context<IPutsParams>) {
         this.logger.debug("connection received data from session");
+        this.logger.debug(ctx.params.message);
         return socket.write(`${ctx.params.message}`);
       },
     },

@@ -34,7 +34,10 @@ export function SessionContext(session: Service): ISessionContext {
       return session.actions.getFromStore({ key, defaultValue });
     },
     setController(controller: string): Promise<any> {
-      return session.actions.setController({ controller });
+      return session.actions.setController({ controller }).catch((e) => {
+        session.logger.error(e);
+        this.puts("Uh oh. Something went terribly wrong.");
+      });
     },
     call(endpoint: string, args: GenericObject) {
       return session.broker.call(endpoint, args).catch((err) => {

@@ -56,13 +56,8 @@ function handlePasswordInput(
           (valid) => {
             if (valid) {
               return context
-                .setInStore("accountId", account.id)
-                .then(() =>
-                  context.call("tau.config.getValue", {
-                    key: "afterLoginController",
-                  })
-                )
-                .then((alc) => context.setController(alc));
+                .setInStore("accountId", account._id)
+                .then(() => context.setController("selectCharacter"));
             } else {
               return context
                 .setInFlash("step", 0)

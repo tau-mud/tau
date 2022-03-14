@@ -17,22 +17,22 @@ export const CreateCharacterTemplate = {
   nameTooShort() {
     return (
       <Box>
-        <Text>The name must be at least</Text>
+        <Text>The name must be at least </Text>
         <Text color="yellow" bold>
           4
         </Text>
-        <Text>characters long.</Text>
+        <Text> characters long.</Text>
       </Box>
     );
   },
   nameTooLong() {
     return (
       <Box>
-        <Text>The name must be at most</Text>
+        <Text>The name must be at most </Text>
         <Text color="yellow" bold>
           10
         </Text>
-        <Text>characters long.</Text>
+        <Text> characters long.</Text>
       </Box>
     );
   },
@@ -48,9 +48,9 @@ export const CreateCharacterTemplate = {
       <Box>
         <Text>The name </Text>
         <Text color="green" bold>
-          {context.name}
+          '{context.name}'
         </Text>
-        <Text>already in use.</Text>
+        <Text> already in use.</Text>
       </Box>
     );
   },

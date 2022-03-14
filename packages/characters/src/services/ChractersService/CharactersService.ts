@@ -8,6 +8,11 @@ interface INameParams {
   name: string;
 }
 
+export interface ICharacter {
+  _id: string;
+  name: string;
+}
+
 import { ICharactersConfiguration } from "../../Configuration";
 
 export function CharactersService(
@@ -20,7 +25,8 @@ export function CharactersService(
     model: model(
       "Character",
       new Schema({
-        name: { type: String },
+        name: { type: String, unique: true, index: true },
+        accountId: { type: String, index: true },
       })
     ),
     actions: {

@@ -34,6 +34,12 @@ export interface ISessionSchema extends ServiceSchema {
   settings: IConnectionSettings;
 }
 
+class InvalidControllerError extends Error {
+  constructor(controller: string) {
+    super(`The controller '${controller}' is not a valid controller`);
+  }
+}
+
 /**
  * The Session represents an individual game session connected to the world. It is the
  * primary point in which all input and output to the player connection goes through.
@@ -160,6 +166,9 @@ export function Session(params: IConnectionSettings): ISessionSchema {
             key: `world.controllers.${ctx.params.controller}`,
           })
           .then((controller: IController) => {
+            if (!controller) {
+              throw new InvalidControllerError(ctx.params.controller);
+            }
             return this.actions
               .setInStore({ key: "controller", value: controller.name })
               .then(() => this.resetFlash())

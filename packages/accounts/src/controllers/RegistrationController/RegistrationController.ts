@@ -109,12 +109,7 @@ async function handleInput(context: ISessionContext, message: IMessageContext) {
                   });
                 })
                 .then((account) => context.setInStore("accountId", account.id))
-                .then(() =>
-                  context.call("tau.config.getValue", {
-                    key: "afterLoginController",
-                  })
-                )
-                .then((alc) => context.setController(alc));
+                .then(() => context.setController("selectCharacter"));
             } else {
               return context
                 .setInFlash("step", 2)

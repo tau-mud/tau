@@ -10,17 +10,17 @@ export type TTemplateFunction = (context: TTemplateContext) => JSX.Element;
 
 /**
  * A Template ia React template using the [Ink]() UI framework. Templates are defined much in the same way that any
- * web based React components, with the exception that a single `TTemplate` object can have multiple renderable
+ * web based React components, with the exception that a single Template object can have multiple renderable
  * React components.
  *
- * ```typescript
+ * ```tsx
  *   import React from "react";
- *   import { TTemplate, TTemplateContext } from "@tau/world";
+ *   import { ITemplate, TTemplateContext } from "@tau/world";
  *
  *   import { Box, Teext} from "ink"
  *
  *
- *   export const MyTemplate: TTemplateContext = {
+ *   export const MyTemplate: ITemplate = {
  *     helloWorld() {
  *         return (
  *             <Box>

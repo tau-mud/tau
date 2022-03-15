@@ -1,8 +1,9 @@
 import { Context, ServiceSchema } from "moleculer";
-
-import DbService from "moleculer-db";
 import MongooseAdapter from "moleculer-db-adapter-mongoose";
 import { model, Schema } from "mongoose";
+
+// import DbService from "moleculer-db";
+import { DataSourceService } from "@tau/world";
 
 interface INameParams {
   name: string;
@@ -20,8 +21,8 @@ export function CharactersService(
 ): ServiceSchema {
   return {
     name: "tau.characters",
-    mixins: [DbService],
-    adapter: new MongooseAdapter(`${config.database}/characters`),
+    mixins: [DataSourceService],
+    adapter: new MongooseAdapter(config.database),
     model: model(
       "Character",
       new Schema({

@@ -45,7 +45,8 @@
     "@tau/utils": "^0.0.0",
     "@tau/world": "^0.0.0",
     "lodash": "^4.17.21",
-    "moleculer": "^0.14.17"
+    "moleculer": "^0.14.17",
+    "moleculer-db": "^0.8.17"
   },
   "types": "./lib/index.d.ts"
 }

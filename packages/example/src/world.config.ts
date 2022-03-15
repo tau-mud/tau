@@ -7,7 +7,7 @@ import baseConfig from "./base.config";
 const config: TBrokerOptions = Configure(
   "world",
   defaultsDeep(baseConfig, {
-    database: "mongodb://localhost:27017",
+    database: "mongodb://localhost:27017/tau",
   })
 );
 

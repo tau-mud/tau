@@ -18,7 +18,7 @@ export function AccountsService(config: IAccountsConfiguration) {
   return {
     name: "tau.accounts",
     mixins: [DbService],
-    adapter: new MongooseAdapter(`${config.database}/accounts`),
+    adapter: new MongooseAdapter(config.database),
     model: model(
       "Account",
       Schema({

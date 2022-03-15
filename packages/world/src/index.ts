@@ -1,4 +1,8 @@
 export { WorldPlugin } from "./WorldPlugin";
-export { ISessionContext } from "./services/SessionService";
+export {
+  DataSourceService,
+  JSONDataSourceService,
+  ISessionContext,
+} from "./services";
 export { IEntity } from "./services/EntityService";
 export * from "./Template";

@@ -1,6 +1,7 @@
-import { Context, ServiceSchema } from "moleculer";
-import { IConfiguration } from "@tau/core";
+import { ServiceSchema } from "moleculer";
 import DbService from "moleculer-db";
+import { IWorldConfiguration } from "../../Configuration";
+import { flatten, keys } from "lodash";
 
 interface IEntityServiceSchema extends ServiceSchema {}
 
@@ -8,30 +9,24 @@ export interface IEntity {
   id: string;
 }
 
-export function EntityService(_config: IConfiguration): IEntityServiceSchema {
+export function EntityService(
+  config: IWorldConfiguration
+): IEntityServiceSchema {
   return {
     name: "tau.entities",
     mixins: [DbService],
-
+    dependencies: config.world.loadDataSources || [],
     settings: {
-      fields: ["_id", "components", "data"],
+      loadDataSources: config.world.loadDataSources,
     },
-
-    actions: {
-      create: {
-        rest: "POST /entities",
-        handler(ctx: Context<any, any>): Promise<any> {
-          const components = Object.keys(ctx.params);
-          return this._create(ctx, { ...ctx.params, components });
-        },
-      },
-      update: {
-        rest: "PUT /:id",
-        handler(ctx: Context<any, any>): Promise<any> {
-          const components = Object.keys(ctx.params);
-          return this._update(ctx, { ...ctx.params, components });
-        },
-      },
+    entityCreated(entity) {
+      this.broker.emit("tau.entities.created", entity);
+    },
+    entityUpdated(entity) {
+      this.broker.emit("tau.entities.updated", entity);
+    },
+    entityRemoved(entity) {
+      this.broker.emit("tau.entities.removed", entity);
     },
   };
 }

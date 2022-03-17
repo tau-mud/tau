@@ -10,10 +10,12 @@ export interface ISessionContext {
   setInStore: (key: string, value: any) => Promise<any>;
   getFromStore: (key: string, defaultValue?: any) => Promise<any>;
   call: (endpoint: string, args: GenericObject) => Promise<any>;
+  sessionId: string;
 }
 
 export function SessionContext(session: Service): ISessionContext {
   return {
+    sessionId: session.name,
     logger: session.logger,
     puts(message: string): Promise<any> {
       return session.actions.puts({ message: message });

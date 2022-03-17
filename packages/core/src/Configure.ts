@@ -4,7 +4,7 @@ import {
   ServiceSchema,
   ServiceRegistry,
 } from "moleculer";
-import { defaultsDeep, get } from "lodash";
+import { defaultsDeep, get, values } from "lodash";
 
 import { TPlugin } from "./Plugin";
 
@@ -15,7 +15,7 @@ interface IRedisConfig {
 }
 
 // Base configuration
-export interface IConfiguration {
+export interface IConfiguration extends BrokerOptions {
   // List of plugins to load
   plugins?: Array<TPlugin>;
   // Services to load
@@ -39,7 +39,7 @@ export function Configure(
     config
   );
 
-  return {
+  const brokerConfig = {
     nodeID: processName,
     logger: {
       type: "Console",
@@ -127,19 +127,19 @@ export function Configure(
     },
     middlewares: [],
     replCommands: null,
-    started(broker: ServiceBroker): Promise<void> {
-      loadPlugins(processName, broker, config);
-      return Promise.resolve();
+    started(broker) {
+      broker.runner.config.services.forEach((service) => {
+        broker.createService(service);
+      });
     },
   };
+
+  config = defaultsDeep(brokerConfig, loadPlugins(processName, config));
+
+  return config;
 }
 
-function loadPlugins(
-  processName: string,
-  broker: ServiceBroker,
-  config: IConfiguration
-) {
-  broker.logger.info("loading TAU plugins");
+function loadPlugins(processName: string, config: IConfiguration) {
   config = defaultsDeep(
     { name: processName },
     config.plugins.reduce((mergedConfig: IConfiguration, plugin) => {
@@ -148,30 +148,18 @@ function loadPlugins(
     }, config)
   );
 
-  broker.logger.debug("configuration:");
-  broker.logger.debug(config);
+  config = { ...config, services: loadServices(config, processName) };
 
-  loadServices(processName, broker, config);
+  return config;
 }
 
-function loadServices(
-  processName: string,
-  broker: ServiceBroker,
-  config: IConfiguration
-) {
-  broker.logger.info(`loading services for process '${processName}'`);
+function loadServices(config, processName) {
   const globalServices = config.services;
   const processServices = get(config, `${processName}.services`);
-  const services = {
+  const fullList = {
     ...globalServices,
     ...processServices,
   };
 
-  console.log(services)
-
-  Object.values(services).forEach((PluginService: any) => {
-    const service = new PluginService(config);
-    broker.logger.info(`loading sesrvice '${service.name}'`);
-    broker.createService(service);
-  });
+  return values(fullList).map((service) => service(config));
 }

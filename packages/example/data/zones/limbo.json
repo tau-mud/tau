@@ -1,6 +1,13 @@
 [
   {
     "_id": "limbo:zone",
-    "name": "Limbo"
+    "name": "Limbo",
+    "container": [""]
+  },
+  {
+    "_id": "limbo:zone/theVastness",
+    "name": "The Vastness",
+    "container": [""],
+    "location": "limbo:zone"
   }
 ]

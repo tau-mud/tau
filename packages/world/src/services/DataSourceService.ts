@@ -9,11 +9,18 @@ import DbService from "moleculer-db";
 export const DataSourceService: ServiceSchema = {
   name: "",
   mixins: [DbService],
-  after: {
-    find(_ctx: Context, res: GenericObject) {
-      return res.map((obj: GenericObject) => {
-        return { ...obj, _source: this.name };
-      });
+  hooks: {
+    before: {
+      update(ctx: Context<GenericObject>) {
+        delete ctx.params.__source;
+      },
+    },
+    after: {
+      find(_ctx: Context, res: GenericObject) {
+        return res.map((obj: GenericObject) => {
+          return { ...obj, _source: this.name };
+        });
+      },
     },
   },
 };

@@ -3,6 +3,8 @@ import { ISessionContext } from "@tau/world";
 
 import { ICharacter } from "../services";
 
+import { defaultsDeep } from "lodash";
+
 export const SelectCharacterController = {
   name: "selectCharacter",
   resume: (_context: ISessionContext) => Promise.resolve(),
@@ -50,9 +52,19 @@ export const SelectCharacterController = {
               );
           } else {
             const character = characters[selection - 1];
-            return context
-              .setInStore("characterId", character._id)
-              .then(() => {});
+            return context.setInStore("characterId", character._id).then(() => {
+              return context.call(
+                "tau.entities.create",
+                defaultsDeep(
+                  {
+                    container: [],
+                    __sessionId: context.sessionId,
+                    location: "limbo:zone/theVastness",
+                  },
+                  character
+                )
+              );
+            });
           }
         } else {
           return context
@@ -61,6 +73,7 @@ export const SelectCharacterController = {
               context.render("selectCharacter.selectFromCharacters", characters)
             );
         }
-      });
+      })
+      .catch((e) => context.logger.error(e));
   },
 };

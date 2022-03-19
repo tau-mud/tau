@@ -52,19 +52,23 @@ export const SelectCharacterController = {
               );
           } else {
             const character = characters[selection - 1];
-            return context.setInStore("characterId", character._id).then(() => {
-              return context.call(
-                "tau.entities.create",
-                defaultsDeep(
-                  {
-                    container: [],
-                    __sessionId: context.sessionId,
-                    location: "limbo:zone/theVastness",
-                  },
-                  character
-                )
-              );
-            });
+            return context
+              .setInStore("characterId", character._id)
+              .then(() => {
+                return context.call(
+                  "tau.entities.create",
+                  defaultsDeep(
+                    {
+                      container: [],
+                      __sessionId: context.sessionId,
+                      location: "limbo:zone/theVastness",
+                      commandSet: "BasicCommandSet",
+                    },
+                    character
+                  )
+                );
+              })
+              .then(() => context.setController("game"));
           }
         } else {
           return context

@@ -26,5 +26,20 @@ export function LocationSystem(): ServiceSchema {
         });
       },
     },
+    actions: {
+      move(ctx) {
+        const entity = ctx.params.entity;
+        return this.updateEntity(ctx, {
+          ...entity,
+          location: ctx.params.to,
+        }).then(() =>
+          ctx.emit(`tau.locations.entityMoved.${entity._id}`, {
+            entity,
+            from: entity.location,
+            to: ctx.params.to,
+          })
+        );
+      },
+    },
   };
 }

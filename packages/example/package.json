@@ -37,6 +37,7 @@
     "@tau/core": "^0.0.0",
     "@tau/portal": "^0.0.0",
     "@tau/world": "^0.0.0",
+    "@tau/muon": "^0.0.0",
     "@types/jest": "^27.0.2",
     "jest": "^27.3.1",
     "moleculer": "^0.14.18",

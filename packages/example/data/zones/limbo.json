@@ -8,6 +8,20 @@
     "_id": "limbo:zone/theVastness",
     "name": "The Vastness",
     "container": [""],
-    "location": "limbo:zone"
+    "location": "limbo:zone",
+    "exits": {
+      "north": {
+        "to": "limbo:zone/theEdge"
+      }
+    }
+  },
+  {
+    "_id": "limbo:zone/theEdge",
+    "name": "The Edge of Reality",
+    "container": [""],
+    "location": "limbo:zone",
+    "exits": {
+
+    }
   }
 ]

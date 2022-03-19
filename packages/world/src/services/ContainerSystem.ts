@@ -8,37 +8,15 @@ export function ContainerSystem(): ServiceSchema {
     filter: { container: { $exists: true } },
     actions: {
       addToContainer(ctx) {
-        return this.broker
-          .call("tau.entities.find", { query: { _id: ctx.params.entity._id } })
-          .then(([entity]) => {
-            if (!entity) {
-              throw new Error(
-                `Entity not found with id '${ctx.params.entity._id}'`
-              );
-            }
-          })
+        return this.findEntity(ctx, ctx.params.entity_id)
+          .then(() => this.findEntity(ctx, ctx.params.container))
+          .then((container) => ({
+            ...container,
+            container: [...container.container, ctx.params.entity._id],
+          }))
+          .then((container) => this.updateEntity(ctx, container))
           .then(() =>
-            this.broker.call("tau.entities.find", {
-              query: { _id: ctx.params.container },
-            })
-          )
-          .then(([container]) => {
-            if (!container) {
-              throw new Error(`Container ${ctx.params.container} not found`);
-            }
-            return container;
-          })
-          .then((container) => {
-            let contents = container.container;
-            contents = [...contents, ctx.params.entity._id];
-
-            return this.broker.call("tau.entities.update", {
-              ...container,
-              container: contents,
-            });
-          })
-          .then(() =>
-            this.broker.emit(
+            ctx.emit(
               `tau.containers.addedToContainer.${ctx.params.container}`,
               ctx.params.entity
             )
@@ -50,6 +28,30 @@ export function ContainerSystem(): ServiceSchema {
             )
           );
       },
+      removeFromContainer(ctx) {
+        return this.findEntity(ctx, ctx.params.entity._id)
+          .then(() => this.find(ctx, { _id: ctx.params.container }))
+          .then((container) => ({
+            ...container,
+            container: container.container.filter(
+              (id) => id !== ctx.params.entity._id
+            ),
+          }))
+          .then((container) => this.updateEntity(ctx, container))
+          .then(() =>
+            ctx.emit(
+              `tau.containers.removedFromContainer.${ctx.params.container}`,
+              ctx.params.entity
+            )
+          )
+          .catch((err) =>
+            this.logger.error(
+              `could not remove entity with id '${ctx.params.entity._id}' from container '${ctx.params.container}'`,
+              err
+            )
+          );
+      },
     },
+    methods: {},
   };
 }

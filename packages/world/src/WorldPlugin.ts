@@ -9,6 +9,9 @@ import { EntityService } from "./services/EntityService";
 import { LocationSystem } from "./services/LocationSystem";
 import { BootstrapService } from "./services/BootstrapService";
 import { RoomSystem } from "./services/RoomSystem";
+import { CommandSetService } from "./services/CommandSetService";
+import { CommandSystem } from "./services/CommandSystem";
+import { GameController } from "./controllers/GameController";
 
 /**
  * The World plugin is one of the two primary plugins that make up a Tau based game. It handles all interactions between
@@ -22,14 +25,17 @@ export function WorldPlugin(_config: IWorldConfiguration): IPlugin {
       services: {
         SessionService,
         EntityService,
+        CommandService: CommandSetService,
         ContainerSystem,
         LocationSystem,
+        CommandSystem,
         BootstrapService,
         RoomSystem,
       },
       controllers: {
         start: StartController,
         motd: MotdController,
+        game: GameController,
       },
       templates: {
         motd: MotdTemplate,

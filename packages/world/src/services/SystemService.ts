@@ -36,6 +36,11 @@ export const SystemService: ServiceSchema = {
       return this.entities[ctx.params._id] !== undefined;
     },
   },
+  actions: {
+    getEntity(ctx) {
+      return this.entities[ctx.params._id];
+    },
+  },
   methods: {
     beforeRegister(_entity) {
       return Promise.resolve();
@@ -56,6 +61,21 @@ export const SystemService: ServiceSchema = {
     },
     updated(entity) {
       return Promise.resolve();
+    },
+    updateEntity(ctx, entity) {
+      return ctx.call("tau.entities.update", entity);
+    },
+    findEntity(ctx, entityId) {
+      return ctx
+        .call("tau.entities.find", {
+          query: { _id: entityId },
+        })
+        .then(([entity]) => {
+          if (!entity) {
+            throw new Error(`Entity not found with id '${entityId}'`);
+          }
+          return entity;
+        });
     },
   },
 };

@@ -1,4 +1,4 @@
-import { ServiceSchema } from "moleculer";
+import Moleculer, { ServiceSchema } from "moleculer";
 import DbService from "moleculer-db";
 import { IEntity } from "../IEntity";
 
@@ -15,42 +15,42 @@ import { IEntity } from "../IEntity";
  * ## Moleculer Dependencies
  * * _All configured datasSources_
  */
-export const EntityService: ServiceSchema = {
-  name: "tau.entities",
-  mixins: [DbService],
+export class EntityService extends Moleculer.Service {
+  readonly name = "tau.entities";
+  readonly mixins = [DbService];
 
   /**
    * @private
    **/
   created() {
     this.loadDataSources = [];
-  },
+  }
 
   /**
    * @private
    **/
   started() {
     return this.broker.waitForServices(this.loadDataSources);
-  },
+  }
 
   /**
    * @private
    **/
   entityCreated(entity: IEntity) {
     this.broker.emit("tau.entities.created", entity);
-  },
+  }
 
   /**
    * @private
    **/
   entityUpdated(entity: IEntity) {
     this.broker.emit("tau.entities.updated", entity);
-  },
+  }
 
   /**
    * @private
    **/
   entityRemoved(entity: IEntity) {
     this.broker.emit("tau.entities.removed", entity);
-  },
-};
+  }
+}

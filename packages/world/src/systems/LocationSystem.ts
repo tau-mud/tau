@@ -1,7 +1,8 @@
 import { Context, ServiceSchema } from "moleculer";
-import { IEntity } from "../IEntity";
 
-import { SystemService } from "../services/SystemService";
+import { SystemService } from "./SystemService";
+
+import { IEntity } from "../IEntity";
 
 /**
  * A location entity defines the `location` attribute which should be the `_id` of the

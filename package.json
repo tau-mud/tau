@@ -21,7 +21,8 @@
     "world:start": "lerna exec --scope @tau/example yarn world:start",
     "clean": "lerna exec --parallel -- yarn clean",
     "watch": "lerna exec --parallel -- yarn watch",
-    "build": "lerna exec --parallel -- yarn build"
+    "build": "lerna exec --parallel -- yarn build",
+    "doc": "typedoc --out ./docs  --entryPointStrategy packages world core --exclude */node_modules/** ."
   },
   "dependencies": {
     "lerna": "^4.0.0",

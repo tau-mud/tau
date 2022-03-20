@@ -1,12 +1,12 @@
-import { ISessionContext } from "@tau/world";
 import { IMessageContext } from "@tau/portal";
+import { Sessions } from "../services";
 
 export const GameController = {
   name: "game",
-  resume(_context: ISessionContext) {
+  resume(_context: Sessions.Context) {
     return Promise.resolve();
   },
-  async start(_context: ISessionContext) {},
-  handleInput: (context: ISessionContext, input: IMessageContext) =>
+  async start(_context: Sessions.Context) {},
+  handleInput: (context: Sessions.Context, input: IMessageContext) =>
     context.call("tau.commands.handleInput", { context, input: input.message }),
 };

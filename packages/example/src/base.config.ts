@@ -1,18 +1,18 @@
-import { PortalPlugin } from "@tau/portal";
+// import { PortalPlugin } from "@tau/portal";
 import { CorePlugin } from "@tau/core";
 import { WorldPlugin } from "@tau/world";
-import { AccountsPlugin } from "@tau/accounts";
-import { CharactersPlugin } from "@tau/characters";
-import { MuonPlugin } from "@tau/muon";
+// import { AccountsPlugin } from "@tau/accounts";
+// import { CharactersPlugin } from "@tau/characters";
+// import { MuonPlugin } from "@tau/muon";
 import { IPlugin } from "@tau/core/lib/Plugin";
-import { ZonesDataSource } from "./services/ZonesDataSource";
+// import { ZonesDataSource } from "./services/ZonesDataSource";
 import path from "path";
 
 function Game(_config: any): IPlugin {
   return {
     name: "Game",
     world: {
-      services: [ZonesDataSource],
+      // services: [ZonesDataSource],
       loadDataSources: ["example.zones"],
     },
   };
@@ -21,12 +21,12 @@ function Game(_config: any): IPlugin {
 export default {
   plugins: [
     CorePlugin,
-    PortalPlugin,
+    // PortalPlugin,
     WorldPlugin,
-    AccountsPlugin,
-    CharactersPlugin,
-    MuonPlugin,
-    Game,
+    // AccountsPlugin,
+    // CharactersPlugin,
+    // MuonPlugin,
+    // Game,
   ],
   redis: {
     host: "localhost",

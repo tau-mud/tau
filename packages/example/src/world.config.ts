@@ -1,10 +1,11 @@
 import { defaultsDeep } from "lodash";
+import { BrokerOptions } from "moleculer";
 
-import { Configure, TBrokerOptions } from "@tau/core";
+import { Configure } from "@tau/core";
 
 import baseConfig from "./base.config";
 
-const config: TBrokerOptions = Configure(
+const config: BrokerOptions = Configure(
   "world",
   defaultsDeep(baseConfig, {
     database: "mongodb://localhost:27017/tau",

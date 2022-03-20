@@ -20,6 +20,7 @@
     "clean": "rm -rf lib/**",
     "watch": "tsc --watch -p tsconfig.build.json",
     "build": "tsc -p tsconfig.build.json",
+    "doc": "typedoc --out docs --excludePrivate src/**",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "devDependencies": {

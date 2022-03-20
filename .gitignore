@@ -4,3 +4,4 @@ packages/**/lib/**
 
 .idea/**
 *.iml
+docs/**

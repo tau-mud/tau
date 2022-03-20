@@ -4,7 +4,7 @@ import { IConfiguration } from "./Configure";
 export type TPlugin = (configuration: IConfiguration) => IPlugin;
 
 export interface IServiceMap {
-  [key: string]: (config: IConfiguration) => ServiceSchema;
+  [key: string]: ServiceSchema;
 }
 
 export interface IPlugin {

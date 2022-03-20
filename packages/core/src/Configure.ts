@@ -1,10 +1,5 @@
-import {
-  ServiceBroker,
-  BrokerOptions,
-  ServiceSchema,
-  ServiceRegistry,
-} from "moleculer";
-import { defaultsDeep, get, values } from "lodash";
+import { BrokerOptions, ServiceSchema, ServiceRegistry } from "moleculer";
+import { defaultsDeep, flattenDeep, get, values } from "lodash";
 
 import { TPlugin } from "./Plugin";
 
@@ -15,7 +10,7 @@ interface IRedisConfig {
 }
 
 // Base configuration
-export interface IConfiguration extends BrokerOptions {
+export interface IConfiguration {
   // List of plugins to load
   plugins?: Array<TPlugin>;
   // Services to load
@@ -26,20 +21,15 @@ export interface IConfiguration extends BrokerOptions {
   redis: IRedisConfig;
 }
 
-export type TBrokerOptions = BrokerOptions;
+// @private
+export interface ITauBrokerOptions extends BrokerOptions {
+  tau: IConfiguration;
+}
 
-export function Configure(
-  processName: string,
-  config: IConfiguration
-): TBrokerOptions {
-  config = defaultsDeep(
-    {
-      plugins: [],
-    },
-    config
-  );
+export function Configure(processName: string, config: IConfiguration): ITauBrokerOptions {
+  const tau = loadPlugins(processName, config);
 
-  const brokerConfig = {
+  return {
     nodeID: processName,
     logger: {
       type: "Console",
@@ -128,29 +118,34 @@ export function Configure(
     middlewares: [],
     replCommands: null,
     started(broker) {
-      broker.runner.config.services.forEach((service) => {
+      const options = broker.runner.config;
+      const services = values(get(options, "tau.services"));
+      broker.logger.info(`loading ${services.length} services`);
+      services.forEach((service) => {
+        if (typeof service === "function") {
+          service = new service(broker);
+        }
+        broker.logger.info("starting service", service.name);
         broker.createService(service);
       });
     },
+    tau,
   };
-
-  config = defaultsDeep(brokerConfig, loadPlugins(processName, config));
-
-  return config;
 }
 
 function loadPlugins(processName: string, config: IConfiguration) {
-  config = defaultsDeep(
-    { name: processName },
-    config.plugins.reduce((mergedConfig: IConfiguration, plugin) => {
-      const pc = plugin(config);
-      return defaultsDeep({ ...mergedConfig }, pc);
-    }, config)
-  );
+  const plugins = config.plugins.map((plugin) => plugin(config));
 
-  config = { ...config, services: loadServices(config, processName) };
+  const services = flattenDeep([
+    config.services || [],
+    plugins.map((plugin) => values(plugin.services || {})),
+    plugins.map((plugin) => values(get(plugin, `${processName}.services`, {}))),
+  ]);
 
-  return config;
+  console.log(services);
+  console.log({ ...config, services });
+
+  return { ...config, services };
 }
 
 function loadServices(config, processName) {
@@ -161,5 +156,5 @@ function loadServices(config, processName) {
     ...processServices,
   };
 
-  return values(fullList).map((service) => service(config));
+  return values(fullList).map((service) => service);
 }

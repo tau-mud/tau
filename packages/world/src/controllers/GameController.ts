@@ -1,12 +1,19 @@
 import { IMessageContext } from "@tau/portal";
+
+import { Controller } from "../Controller";
 import { Sessions } from "../services";
 
-export const GameController = {
-  name: "game",
-  resume(_context: Sessions.Context) {
-    return Promise.resolve();
-  },
-  async start(_context: Sessions.Context) {},
-  handleInput: (context: Sessions.Context, input: IMessageContext) =>
-    context.call("tau.commands.handleInput", { context, input: input.message }),
-};
+/**
+ * This is the primary game controller. It take incoming input and passes it to the command
+ * handler.
+ */
+export class GameController extends Controller {
+  name: "game";
+
+  /**
+   * @private
+   */
+  handleInput(context: Sessions.Context, input: IMessageContext) {
+    return context.call("tau.commands.handleInput", { context, input: input.message });
+  }
+}

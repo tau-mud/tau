@@ -1,12 +1,12 @@
 import { IServiceMap } from "@tau/core";
 
-import { IController } from "./Controller";
+import { Controller } from "./Controller";
 import { ITemplate } from "./Template";
 import { IConfiguration } from "@tau/core/lib/Configure";
 import { Argv } from "yargs";
 
 interface IControllerMap {
-  [key: string]: IController;
+  [key: string]: Controller;
 }
 
 interface ITemplateMap {

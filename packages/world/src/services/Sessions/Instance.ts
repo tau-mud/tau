@@ -6,7 +6,7 @@ import { Action, Event } from "typed-moleculer";
 
 import { IMessageContext, IConnectionSettings, IPutsParams } from "@tau/portal";
 
-import { IController } from "../../Controller";
+import { Controller } from "../../Controller";
 import { TTemplateFunction } from "../../Template";
 import { IRenderContext, Context } from ".";
 import { RenderBuffer } from "./RenderBuffer";
@@ -89,7 +89,7 @@ export class Instance extends Moleculer.Service {
    * @private
    */
   async started() {
-    return this.actions.getController().then(async (controller: IController | null) => {
+    return this.actions.getController().then(async (controller: Controller | null) => {
       if (controller) {
         return this.actions.resumeCurrentController();
       } else {
@@ -154,13 +154,13 @@ export class Instance extends Moleculer.Service {
     this.logger.debug("getting controller");
     return this.actions
       .getFromStore({ key: "controller" })
-      .then((name: string): Promise<IController> => {
+      .then((name: string): Promise<Controller> => {
         this.logger.debug(`the current controller is '${name}'`);
         return this.broker.call("tau.config.getValue", {
           key: `world.controllers.${name}`,
         });
       })
-      .then((controller: IController | null) => {
+      .then((controller: Controller | null) => {
         return controller;
       });
   }
@@ -174,7 +174,7 @@ export class Instance extends Moleculer.Service {
   startCurrentController() {
     this.actions
       .getController()
-      .then((controller: IController) => {
+      .then((controller: Controller) => {
         this.logger.debug(`starting '${controller.name}'`);
         return controller.start(new Context(this));
       })
@@ -192,7 +192,7 @@ export class Instance extends Moleculer.Service {
    */
   @Action()
   resumeCurrentController() {
-    this.actions.getController().then((controller: IController) => {
+    this.actions.getController().then((controller: Controller) => {
       this.logger.debug(`resuming '${controller.name}'`);
       controller.resume(new Context(this));
     });
@@ -213,7 +213,7 @@ export class Instance extends Moleculer.Service {
       .call("tau.config.getValue", {
         key: `world.controllers.${ctx.params.controller}`,
       })
-      .then(async (controller: IController) => {
+      .then(async (controller: Controller) => {
         if (!controller) {
           throw new InvalidControllerError(ctx.params.controller);
         }
@@ -250,7 +250,7 @@ export class Instance extends Moleculer.Service {
     this.logger.debug("handling input");
     return this.actions
       .getController()
-      .then((controller: IController) => {
+      .then((controller: Controller) => {
         this.logger.debug(
           `received input from connection, passing to '${controller.name}' controller`
         );

@@ -1,6 +1,7 @@
 export { WorldPlugin } from "./WorldPlugin";
 export * from "./Template";
 
-import * as Services from "./services";
-
-export { Services };
+export * as Services from "./services";
+export * as DataSources from "./datasources";
+export * as Controllers from "./controllers";
+export { IEntity } from "./IEntity";

@@ -2800,6 +2800,11 @@ compare-func@^2.0.0:
     array-ify "^1.0.0"
     dot-prop "^5.1.0"
 
+compare-versions@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/compare-versions/-/compare-versions-3.6.0.tgz#1a5689913685e5a87637b8d3ffca75514ec41d62"
+  integrity sha512-W6Af2Iw1z4CB7q4uU4hv646dW9GQuBM+YpC0UvUCWSD8w90SJjp+ujJuXaEMtAXBtSqGfMPuFOVn4/+FlaqfBA==
+
 concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
@@ -3176,6 +3181,11 @@ dedent@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/dedent/-/dedent-0.7.0.tgz#2495ddbaf6eb874abb0e1be9df22d2e5a544326c"
   integrity sha1-JJXduvbrh0q7Dhvp3yLS5aVEMmw=
+
+deep-copy@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/deep-copy/-/deep-copy-1.4.2.tgz#0622719257e4bd60240e401ea96718211c5c4697"
+  integrity sha512-VxZwQ/1+WGQPl5nE67uLhh7OqdrmqI1OazrraO9Bbw/M8Bt6Mol/RxzDA6N6ZgRXpsG/W9PgUj8E1LHHBEq2GQ==
 
 deep-extend@^0.6.0:
   version "0.6.0"
@@ -6137,7 +6147,7 @@ lru-queue@0.1:
   dependencies:
     es5-ext "~0.10.2"
 
-lunr@^2.3.9:
+lunr@^2.3.8, lunr@^2.3.9:
   version "2.3.9"
   resolved "https://registry.yarnpkg.com/lunr/-/lunr-2.3.9.tgz#18b123142832337dd6e964df1a5a7707b25d35e1"
   integrity sha512-zTU3DaZaF3Rt9rhN3uBMGQD3dD2/vFQqnvZCDv4dl5iOzq2IZQqTxu90r4E5J+nP70J3ilqVCrbho2eWaeW8Ow==
@@ -6547,6 +6557,13 @@ moleculer-repl@^0.6.4, moleculer-repl@^0.6.6:
     pretty-bytes "^5.6.0"
     table "^6.7.1"
     tiny-human-time "^1.2.0"
+
+moleculer-service-decorators@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/moleculer-service-decorators/-/moleculer-service-decorators-1.0.4.tgz#bd866022c6c901bc4b31c274af222aa00bb904cb"
+  integrity sha512-oeLMtpHIX3wYzdvlgqB9y35D8f/3zamP6smsJhq8zUyfl09C39kuVsg81bY8nC0u7yk8LkRpEKOlZodMreo74w==
+  dependencies:
+    reflect-metadata "^0.1.13"
 
 moleculer@^0.14.0, moleculer@^0.14.17, moleculer@^0.14.18, moleculer@^0.14.5:
   version "0.14.19"
@@ -7819,6 +7836,11 @@ redlock@^4.2.0:
   dependencies:
     bluebird "^3.7.2"
 
+reflect-metadata@^0.1.13:
+  version "0.1.13"
+  resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.13.tgz#67ae3ca57c972a2aa1642b10fe363fe32d49dc08"
+  integrity sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==
+
 regenerator-runtime@^0.10.5:
   version "0.10.5"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.10.5.tgz#336c3efc1220adcedda2c9fab67b5a7955a33658"
@@ -8992,6 +9014,13 @@ type@^2.5.0:
   resolved "https://registry.yarnpkg.com/type/-/type-2.6.0.tgz#3ca6099af5981d36ca86b78442973694278a219f"
   integrity sha512-eiDBDOmkih5pMbo9OqsqPRGMljLodLcwd5XD5JbtNB0o89xZAwynY9EdCDsJU7LtcVCClu9DvM7/0Ep1hYX3EQ==
 
+typed-moleculer@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/typed-moleculer/-/typed-moleculer-1.0.5.tgz#f90138f739036d58a1bb8947368446c4f38eae81"
+  integrity sha512-vkIP0mFL3IGOJ6fBxaYG3xKY3hdJZIKuskbUOCK6hIzSD9U2AXUea3Kgvwvrp8qFEG9fTQ99QKY0KXrqiiJKDA==
+  dependencies:
+    deep-copy "^1.4.2"
+
 typedarray-to-buffer@^3.1.5:
   version "3.1.5"
   resolved "https://registry.yarnpkg.com/typedarray-to-buffer/-/typedarray-to-buffer-3.1.5.tgz#a97ee7a9ff42691b9f783ff1bc5112fe3fca9080"
@@ -9003,6 +9032,32 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+
+typedoc-default-themes@^0.10.1:
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/typedoc-default-themes/-/typedoc-default-themes-0.10.2.tgz#743380a80afe62c5ef92ca1bd4abe2ac596be4d2"
+  integrity sha512-zo09yRj+xwLFE3hyhJeVHWRSPuKEIAsFK5r2u47KL/HBKqpwdUSanoaz5L34IKiSATFrjG5ywmIu98hPVMfxZg==
+  dependencies:
+    lunr "^2.3.8"
+
+typedoc-github-wiki-theme@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/typedoc-github-wiki-theme/-/typedoc-github-wiki-theme-1.0.0.tgz#85e2171be1a15457e80f2a3ca07a653bc8c77e91"
+  integrity sha512-8ZuRBSTq15j7oTCMRAiZV3t7KH+Y6tOXkEcyRj5HUEwCgd08DCfXpSrLHjXc83MlvvGi+16n7LuXK17NkEjf/g==
+
+typedoc-plugin-markdown@^3.11.14:
+  version "3.11.14"
+  resolved "https://registry.yarnpkg.com/typedoc-plugin-markdown/-/typedoc-plugin-markdown-3.11.14.tgz#2a7a04abd50b8f1e5d46793061d70229d504d2cd"
+  integrity sha512-lh47OQvl0079nB18YL9wuTRRhMpjo300SZKfx/xpQY8qG+GINeSxTod95QBELeI0NP81sNtUbemRDrn5nyef4Q==
+  dependencies:
+    handlebars "^4.7.7"
+
+"typedoc-plugin-pages@https://github.com/sastan/typedoc-plugin-pages":
+  version "0.0.1"
+  resolved "https://github.com/sastan/typedoc-plugin-pages#e75dcda16fafb77e0b8341529e299ff396406cbe"
+  dependencies:
+    compare-versions "^3.6.0"
+    typedoc-default-themes "^0.10.1"
 
 typedoc@^0.22.13:
   version "0.22.13"

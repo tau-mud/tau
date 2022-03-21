@@ -13,7 +13,9 @@
     "ts-node": "^10.4.0",
     "typedoc": "^0.22.13",
     "typescript": "^4.4.4",
-    "typescript-eslint-parser": "^22.0.0"
+    "typescript-eslint-parser": "^22.0.0",
+    "typedoc-github-wiki-theme": "^1.0.0",
+    "typedoc-plugin-markdown": "^3.11.14"
   },
   "scripts": {
     "run": "lerna",
@@ -22,7 +24,7 @@
     "clean": "lerna exec --parallel -- yarn clean",
     "watch": "lerna exec --parallel -- yarn watch",
     "build": "lerna exec --parallel -- yarn build",
-    "doc": "typedoc --out ./docs  --entryPointStrategy packages world core --exclude */node_modules/** ."
+    "doc": "typedoc packages/world packages/core"
   },
   "dependencies": {
     "lerna": "^4.0.0",

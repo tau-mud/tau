@@ -1,4 +1,4 @@
-import { ServiceSchema } from "core/node_modules/moleculer";
+import { ServiceSchema } from "moleculer";
 import { filter } from "lodash";
 import Moleculer from "moleculer";
 

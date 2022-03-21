@@ -1,4 +1,4 @@
-import Moleculer, { ServiceSchema } from "moleculer";
+import Moleculer from "moleculer";
 import DbService from "moleculer-db";
 import { IEntity } from "../IEntity";
 
@@ -15,7 +15,7 @@ import { IEntity } from "../IEntity";
  * ## Moleculer Dependencies
  * * _All configured datasSources_
  */
-export class EntityService extends Moleculer.Service {
+export class Registry extends Moleculer.Service {
   readonly name = "tau.entities";
   readonly mixins = [DbService];
 

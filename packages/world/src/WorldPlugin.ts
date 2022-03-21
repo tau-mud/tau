@@ -1,14 +1,14 @@
-import { IPlugin, IConfiguration } from "@tau/core";
+import { IPlugin } from "@tau/core";
 
 import { StartController, MotdController } from "./controllers";
 import { MotdTemplate } from "./templates";
 import { IWorldConfiguration } from "./Configuration";
 
 // Services
-import { Sessions, EntityService } from "./services";
+import { Sessions, Entities, CommandSets, Bootstrapper } from "./services";
 
 // Systems
-import { LocationSystem } from "./systems";
+// import { LocationSystem } from "./systems";
 // import { RoomSystem } from "./services/RoomSystem";
 import { GameController } from "./controllers/GameController";
 
@@ -22,13 +22,13 @@ export function WorldPlugin(_config: IWorldConfiguration): IPlugin {
     name: "world",
     world: {
       services: {
-        SessionService: Sessions.Manager,
-        EntityService,
-        // CommandSetService,
+        Session: Sessions.Manager,
+        Entities: Entities.Registry,
+        CommandSets: CommandSets.Registry,
+        Bootstrapper,
         // ContainerSystem,
         // LocationSystem,
         // CommandSystem,
-        // BootstrapService,
         // RoomSystem,
       },
       controllers: {

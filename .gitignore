@@ -5,4 +5,4 @@ packages/**/lib/**
 .idea/**
 *.iml
 
-docs/.vuepress/dist/**
+docs/.vuepress/dist

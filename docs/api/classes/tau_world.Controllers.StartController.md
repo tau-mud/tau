@@ -49,7 +49,7 @@ Controller.name
 
 #### Defined in
 
-[taumud/tau/packages/world/src/controllers/StartController.ts:9](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/controllers/StartController.ts#L9)
+[taumud/tau/packages/world/src/controllers/StartController.ts:9](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/controllers/StartController.ts#L9)
 
 ## Methods
 
@@ -76,7 +76,7 @@ Controller.handleInput
 
 #### Defined in
 
-[taumud/tau/packages/world/src/Controller.ts:33](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/Controller.ts#L33)
+[taumud/tau/packages/world/src/Controller.ts:33](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/Controller.ts#L33)
 
 ___
 
@@ -102,7 +102,7 @@ Controller.resume
 
 #### Defined in
 
-[taumud/tau/packages/world/src/Controller.ts:26](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/Controller.ts#L26)
+[taumud/tau/packages/world/src/Controller.ts:26](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/Controller.ts#L26)
 
 ___
 
@@ -126,4 +126,4 @@ Controller.start
 
 #### Defined in
 
-[taumud/tau/packages/world/src/controllers/StartController.ts:13](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/controllers/StartController.ts#L13)
+[taumud/tau/packages/world/src/controllers/StartController.ts:13](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/controllers/StartController.ts#L13)

@@ -39,7 +39,7 @@
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Context.ts:12](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Sessions/Context.ts#L12)
+[taumud/tau/packages/world/src/services/Sessions/Context.ts:12](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Context.ts#L12)
 
 ## Properties
 
@@ -49,7 +49,7 @@
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Context.ts:10](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Sessions/Context.ts#L10)
+[taumud/tau/packages/world/src/services/Sessions/Context.ts:10](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Context.ts#L10)
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Context.ts:8](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Sessions/Context.ts#L8)
+[taumud/tau/packages/world/src/services/Sessions/Context.ts:8](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Context.ts#L8)
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Context.ts:9](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Sessions/Context.ts#L9)
+[taumud/tau/packages/world/src/services/Sessions/Context.ts:9](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Context.ts#L9)
 
 ## Methods
 
@@ -90,7 +90,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Context.ts:47](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Sessions/Context.ts#L47)
+[taumud/tau/packages/world/src/services/Sessions/Context.ts:47](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Context.ts#L47)
 
 ___
 
@@ -111,7 +111,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Context.ts:30](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Sessions/Context.ts#L30)
+[taumud/tau/packages/world/src/services/Sessions/Context.ts:30](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Context.ts#L30)
 
 ___
 
@@ -132,7 +132,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Context.ts:38](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Sessions/Context.ts#L38)
+[taumud/tau/packages/world/src/services/Sessions/Context.ts:38](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Context.ts#L38)
 
 ___
 
@@ -152,7 +152,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Context.ts:18](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Sessions/Context.ts#L18)
+[taumud/tau/packages/world/src/services/Sessions/Context.ts:18](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Context.ts#L18)
 
 ___
 
@@ -173,7 +173,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Context.ts:22](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Sessions/Context.ts#L22)
+[taumud/tau/packages/world/src/services/Sessions/Context.ts:22](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Context.ts#L22)
 
 ___
 
@@ -193,7 +193,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Context.ts:41](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Sessions/Context.ts#L41)
+[taumud/tau/packages/world/src/services/Sessions/Context.ts:41](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Context.ts#L41)
 
 ___
 
@@ -214,7 +214,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Context.ts:26](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Sessions/Context.ts#L26)
+[taumud/tau/packages/world/src/services/Sessions/Context.ts:26](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Context.ts#L26)
 
 ___
 
@@ -235,4 +235,4 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Context.ts:34](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Sessions/Context.ts#L34)
+[taumud/tau/packages/world/src/services/Sessions/Context.ts:34](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Context.ts#L34)

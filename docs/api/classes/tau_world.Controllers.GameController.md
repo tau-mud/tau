@@ -49,7 +49,7 @@ Controller.name
 
 #### Defined in
 
-[taumud/tau/packages/world/src/controllers/GameController.ts:11](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/controllers/GameController.ts#L11)
+[taumud/tau/packages/world/src/controllers/GameController.ts:11](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/controllers/GameController.ts#L11)
 
 ## Methods
 
@@ -74,7 +74,7 @@ Controller.handleInput
 
 #### Defined in
 
-[taumud/tau/packages/world/src/controllers/GameController.ts:16](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/controllers/GameController.ts#L16)
+[taumud/tau/packages/world/src/controllers/GameController.ts:16](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/controllers/GameController.ts#L16)
 
 ___
 
@@ -100,7 +100,7 @@ Controller.resume
 
 #### Defined in
 
-[taumud/tau/packages/world/src/Controller.ts:26](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/Controller.ts#L26)
+[taumud/tau/packages/world/src/Controller.ts:26](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/Controller.ts#L26)
 
 ___
 
@@ -126,4 +126,4 @@ Controller.start
 
 #### Defined in
 
-[taumud/tau/packages/world/src/Controller.ts:19](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/Controller.ts#L19)
+[taumud/tau/packages/world/src/Controller.ts:19](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/Controller.ts#L19)

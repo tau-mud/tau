@@ -19,7 +19,7 @@ The context to render the template with.
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Instance.ts:55](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Sessions/Instance.ts#L55)
+[taumud/tau/packages/world/src/services/Sessions/Instance.ts:55](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Instance.ts#L55)
 
 ___
 
@@ -31,4 +31,4 @@ The name of the template to render.
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Instance.ts:51](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Sessions/Instance.ts#L51)
+[taumud/tau/packages/world/src/services/Sessions/Instance.ts:51](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Instance.ts#L51)

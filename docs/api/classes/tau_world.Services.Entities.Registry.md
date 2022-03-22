@@ -194,7 +194,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Entities.ts:20](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Entities.ts#L20)
+[taumud/tau/packages/world/src/services/Entities.ts:20](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Entities.ts#L20)
 
 ___
 
@@ -208,7 +208,7 @@ Moleculer.Service.name
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Entities.ts:19](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Entities.ts#L19)
+[taumud/tau/packages/world/src/services/Entities.ts:19](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Entities.ts#L19)
 
 ___
 
@@ -332,7 +332,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Entities.ts:25](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Entities.ts#L25)
+[taumud/tau/packages/world/src/services/Entities.ts:25](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Entities.ts#L25)
 
 ___
 
@@ -352,7 +352,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Entities.ts:39](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Entities.ts#L39)
+[taumud/tau/packages/world/src/services/Entities.ts:39](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Entities.ts#L39)
 
 ___
 
@@ -372,7 +372,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Entities.ts:53](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Entities.ts#L53)
+[taumud/tau/packages/world/src/services/Entities.ts:53](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Entities.ts#L53)
 
 ___
 
@@ -392,7 +392,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Entities.ts:46](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Entities.ts#L46)
+[taumud/tau/packages/world/src/services/Entities.ts:46](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Entities.ts#L46)
 
 ___
 
@@ -430,7 +430,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Entities.ts:32](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Entities.ts#L32)
+[taumud/tau/packages/world/src/services/Entities.ts:32](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Entities.ts#L32)
 
 ___
 

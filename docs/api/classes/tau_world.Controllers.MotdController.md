@@ -48,7 +48,7 @@ Controller.name
 
 #### Defined in
 
-[taumud/tau/packages/world/src/controllers/MotdController.ts:8](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/controllers/MotdController.ts#L8)
+[taumud/tau/packages/world/src/controllers/MotdController.ts:8](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/controllers/MotdController.ts#L8)
 
 ## Methods
 
@@ -75,7 +75,7 @@ Controller.handleInput
 
 #### Defined in
 
-[taumud/tau/packages/world/src/Controller.ts:33](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/Controller.ts#L33)
+[taumud/tau/packages/world/src/Controller.ts:33](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/Controller.ts#L33)
 
 ___
 
@@ -101,7 +101,7 @@ Controller.resume
 
 #### Defined in
 
-[taumud/tau/packages/world/src/Controller.ts:26](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/Controller.ts#L26)
+[taumud/tau/packages/world/src/Controller.ts:26](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/Controller.ts#L26)
 
 ___
 
@@ -125,4 +125,4 @@ Controller.start
 
 #### Defined in
 
-[taumud/tau/packages/world/src/controllers/MotdController.ts:13](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/controllers/MotdController.ts#L13)
+[taumud/tau/packages/world/src/controllers/MotdController.ts:13](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/controllers/MotdController.ts#L13)

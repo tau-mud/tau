@@ -126,7 +126,7 @@ Moleculer.Service.dependencies
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Bootstrapper.ts:12](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Bootstrapper.ts#L12)
+[taumud/tau/packages/world/src/services/Bootstrapper.ts:12](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Bootstrapper.ts#L12)
 
 ___
 
@@ -182,7 +182,7 @@ Moleculer.Service.name
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Bootstrapper.ts:11](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Bootstrapper.ts#L11)
+[taumud/tau/packages/world/src/services/Bootstrapper.ts:11](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Bootstrapper.ts#L11)
 
 ___
 
@@ -312,7 +312,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Bootstrapper.ts:43](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Bootstrapper.ts#L43)
+[taumud/tau/packages/world/src/services/Bootstrapper.ts:43](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Bootstrapper.ts#L43)
 
 ___
 
@@ -350,7 +350,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Bootstrapper.ts:17](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Bootstrapper.ts#L17)
+[taumud/tau/packages/world/src/services/Bootstrapper.ts:17](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Bootstrapper.ts#L17)
 
 ___
 

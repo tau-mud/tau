@@ -19,7 +19,7 @@ The key to set in the store
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Instance.ts:18](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Sessions/Instance.ts#L18)
+[taumud/tau/packages/world/src/services/Sessions/Instance.ts:18](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Instance.ts#L18)
 
 ___
 
@@ -31,4 +31,4 @@ The value to set in the store
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Instance.ts:22](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Sessions/Instance.ts#L22)
+[taumud/tau/packages/world/src/services/Sessions/Instance.ts:22](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Instance.ts#L22)

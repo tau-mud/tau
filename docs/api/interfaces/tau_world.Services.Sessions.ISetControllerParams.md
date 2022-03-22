@@ -19,7 +19,7 @@ The name of the controller to swithc to.
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Instance.ts:40](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Sessions/Instance.ts#L40)
+[taumud/tau/packages/world/src/services/Sessions/Instance.ts:40](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Instance.ts#L40)
 
 ___
 
@@ -31,4 +31,4 @@ Whether or not to force the controller to start if it is already started
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Instance.ts:44](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Sessions/Instance.ts#L44)
+[taumud/tau/packages/world/src/services/Sessions/Instance.ts:44](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Instance.ts#L44)

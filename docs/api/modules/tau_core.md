@@ -39,7 +39,7 @@
 
 #### Defined in
 
-[taumud/tau/packages/core/src/Plugin.ts:4](https://github.com/tau-mud/tau/blob/0a6de30/packages/core/src/Plugin.ts#L4)
+[taumud/tau/packages/core/src/Plugin.ts:4](https://github.com/tau-mud/tau/blob/b8e3567/packages/core/src/Plugin.ts#L4)
 
 ## Functions
 
@@ -60,7 +60,7 @@
 
 #### Defined in
 
-[taumud/tau/packages/core/src/Configure.ts:29](https://github.com/tau-mud/tau/blob/0a6de30/packages/core/src/Configure.ts#L29)
+[taumud/tau/packages/core/src/Configure.ts:29](https://github.com/tau-mud/tau/blob/b8e3567/packages/core/src/Configure.ts#L29)
 
 ___
 
@@ -80,4 +80,4 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/core/src/CorePlugin.ts:5](https://github.com/tau-mud/tau/blob/0a6de30/packages/core/src/CorePlugin.ts#L5)
+[taumud/tau/packages/core/src/CorePlugin.ts:5](https://github.com/tau-mud/tau/blob/b8e3567/packages/core/src/CorePlugin.ts#L5)

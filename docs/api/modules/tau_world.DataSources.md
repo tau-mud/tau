@@ -19,4 +19,4 @@ define JSON data sources, allowing all `*.json` files in the specified directori
 
 #### Defined in
 
-[taumud/tau/packages/world/src/datasources/JSONDataSource.ts:12](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/datasources/JSONDataSource.ts#L12)
+[taumud/tau/packages/world/src/datasources/JSONDataSource.ts:12](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/datasources/JSONDataSource.ts#L12)

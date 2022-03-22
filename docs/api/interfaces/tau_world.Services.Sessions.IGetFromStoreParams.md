@@ -19,7 +19,7 @@ The default value to return if the key is not found
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Instance.ts:33](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Sessions/Instance.ts#L33)
+[taumud/tau/packages/world/src/services/Sessions/Instance.ts:33](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Instance.ts#L33)
 
 ___
 
@@ -31,4 +31,4 @@ The key to get from the store
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Instance.ts:29](https://github.com/tau-mud/tau/blob/0a6de30/packages/world/src/services/Sessions/Instance.ts#L29)
+[taumud/tau/packages/world/src/services/Sessions/Instance.ts:29](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Instance.ts#L29)

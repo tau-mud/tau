@@ -1,15 +1,33 @@
-import { ServiceSchema } from "moleculer";
+import { Context, ServiceSchema } from "moleculer";
 
 /**
- * The SystemService is a Moleculer module designed to be [mixed in](to)
+ * This is a [Moleculer mixin](https://moleculer.services/docs/0.14/services.html#Mixins) that
+ * can be used to create systems within Tau's Entity Component System framework. Whenever a game
+ * entity is created, updated, or destroyed, the system will be notified, and apply its filter to
+ * the entity. If the entity matches, it will call the appropriate callbacks.
+ *
+ * ### Filters
+ * Filters are the method by which a system determines whether an entity should be processed. Every
+ * system should have a filter, otherwise it will match every entity. Filters are simply
+ * [NeDB queries](https://github.com/louischatriot/nedb#basic-querying) that are runa gainst the
+ * {@link @tau/world.Services.Entities.Registry} service, which is simply an NeDB in memory database.
+ *
+ * ### Callbacks
+ * Callbacks are the method by which a system processes an entity. Developers can override the
+ * callbacks to implement behaviours when the entity is created, updated, or destroyed.
  **/
-export const SystemService: ServiceSchema = {
+export const System: ServiceSchema = {
   name: "",
   dependencies: ["tau.entities"],
+
+  /**
+   * @private
+   */
   created() {
     this.filter = this.schema.filter;
     this.entities = {};
   },
+
   events: {
     "tau.entities.created"(ctx) {
       return this.broker

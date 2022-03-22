@@ -1,10 +1,10 @@
 import { ServiceSchema } from "moleculer";
-import { SystemService } from "./SystemService";
+import { System } from "../System";
 
 export function ContainerSystem(): ServiceSchema {
   return {
     name: "tau.containers",
-    mixins: [SystemService],
+    mixins: [System],
     filter: { container: { $exists: true } },
     actions: {
       addToContainer(ctx) {
@@ -16,10 +16,7 @@ export function ContainerSystem(): ServiceSchema {
           }))
           .then((container) => this.updateEntity(ctx, container))
           .then(() =>
-            ctx.emit(
-              `tau.containers.addedToContainer.${ctx.params.container}`,
-              ctx.params.entity
-            )
+            ctx.emit(`tau.containers.addedToContainer.${ctx.params.container}`, ctx.params.entity)
           )
           .catch((err) =>
             this.logger.error(
@@ -33,9 +30,7 @@ export function ContainerSystem(): ServiceSchema {
           .then(() => this.find(ctx, { _id: ctx.params.container }))
           .then((container) => ({
             ...container,
-            container: container.container.filter(
-              (id) => id !== ctx.params.entity._id
-            ),
+            container: container.container.filter((id) => id !== ctx.params.entity._id),
           }))
           .then((container) => this.updateEntity(ctx, container))
           .then(() =>

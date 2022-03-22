@@ -1,7 +1,6 @@
 module.exports = {
   name: "Tau MUD Engine",
-  out: "./wiki",
-  theme: "github-wiki",
+  theme: "markdown",
   entryPointStrategy: "packages",
   exclude: "**/node_modules/**",
 };

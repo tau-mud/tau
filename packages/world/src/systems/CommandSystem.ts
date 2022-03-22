@@ -1,10 +1,10 @@
 import { ServiceSchema } from "moleculer";
-import { SystemService } from "./SystemService";
+import { System } from "../System";
 
 export function CommandSystem(): ServiceSchema {
   return {
     name: "tau.commands",
-    mixins: [SystemService],
+    mixins: [System],
     filter: { commandSet: { $exists: true } },
     actions: {
       handleInput(ctx) {

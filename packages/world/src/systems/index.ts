@@ -1,3 +1,1 @@
-export * from "./LocationSystem";
-export * from "./RoomSystem";
-export * from "./SystemService";
+export * from "./Locations";

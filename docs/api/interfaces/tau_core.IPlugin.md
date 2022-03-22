@@ -21,7 +21,7 @@
 
 #### Defined in
 
-[taumud/tau/packages/core/src/Plugin.ts:11](https://github.com/tau-mud/tau/blob/b8e3567/packages/core/src/Plugin.ts#L11)
+[taumud/tau/packages/core/src/Plugin.ts:11](https://github.com/tau-mud/tau/blob/9ec4b58/packages/core/src/Plugin.ts#L11)
 
 ___
 
@@ -31,4 +31,4 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/core/src/Plugin.ts:12](https://github.com/tau-mud/tau/blob/b8e3567/packages/core/src/Plugin.ts#L12)
+[taumud/tau/packages/core/src/Plugin.ts:12](https://github.com/tau-mud/tau/blob/9ec4b58/packages/core/src/Plugin.ts#L12)

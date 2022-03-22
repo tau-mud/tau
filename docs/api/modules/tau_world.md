@@ -36,7 +36,7 @@ The Template Context is any arguments passed to the template for its use.
 
 #### Defined in
 
-[taumud/tau/packages/world/src/Template.ts:4](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/Template.ts#L4)
+[taumud/tau/packages/world/src/Template.ts:4](https://github.com/tau-mud/tau/blob/9ec4b58/packages/world/src/Template.ts#L4)
 
 ___
 
@@ -62,7 +62,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/Template.ts:9](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/Template.ts#L9)
+[taumud/tau/packages/world/src/Template.ts:9](https://github.com/tau-mud/tau/blob/9ec4b58/packages/world/src/Template.ts#L9)
 
 ## Variables
 
@@ -87,7 +87,7 @@ callbacks to implement behaviours when the entity is created, updated, or destro
 
 #### Defined in
 
-[taumud/tau/packages/world/src/System.ts:19](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/System.ts#L19)
+[taumud/tau/packages/world/src/System.ts:19](https://github.com/tau-mud/tau/blob/9ec4b58/packages/world/src/System.ts#L19)
 
 ## Functions
 
@@ -111,4 +111,4 @@ excepting `@tau/portal`.
 
 #### Defined in
 
-[taumud/tau/packages/world/src/WorldPlugin.ts:21](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/WorldPlugin.ts#L21)
+[taumud/tau/packages/world/src/WorldPlugin.ts:21](https://github.com/tau-mud/tau/blob/9ec4b58/packages/world/src/WorldPlugin.ts#L21)

@@ -22,4 +22,4 @@ Represents a game `Entity`
 
 #### Defined in
 
-[taumud/tau/packages/world/src/IEntity.ts:5](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/IEntity.ts#L5)
+[taumud/tau/packages/world/src/IEntity.ts:5](https://github.com/tau-mud/tau/blob/9ec4b58/packages/world/src/IEntity.ts#L5)

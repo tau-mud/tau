@@ -16,4 +16,4 @@
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/CommandSets.ts:15](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/CommandSets.ts#L15)
+[taumud/tau/packages/world/src/services/CommandSets.ts:15](https://github.com/tau-mud/tau/blob/9ec4b58/packages/world/src/services/CommandSets.ts#L15)

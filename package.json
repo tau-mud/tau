@@ -26,7 +26,7 @@
     "clean": "lerna exec --parallel -- yarn clean",
     "watch": "lerna exec --parallel -- yarn watch",
     "build": "lerna exec --parallel -- yarn build",
-    "doc": "typedoc packages/world packages/core"
+    "doc:deploy": "rm -rf docs/.vuepress/dist; vuepress build docs && cd docs/.vuepress/dist && git init && git add -A && git commit -m 'docs(vuepress): deploy' && git push -f git@github.com:tau-mud/tau-mud.github.io.git master"
   },
   "dependencies": {
     "lerna": "^4.0.0",

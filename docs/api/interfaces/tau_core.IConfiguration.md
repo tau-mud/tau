@@ -19,7 +19,7 @@
 
 #### Defined in
 
-[taumud/tau/packages/core/src/Configure.ts:15](https://github.com/tau-mud/tau/blob/b8e3567/packages/core/src/Configure.ts#L15)
+[taumud/tau/packages/core/src/Configure.ts:15](https://github.com/tau-mud/tau/blob/9ec4b58/packages/core/src/Configure.ts#L15)
 
 ___
 
@@ -29,7 +29,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/core/src/Configure.ts:21](https://github.com/tau-mud/tau/blob/b8e3567/packages/core/src/Configure.ts#L21)
+[taumud/tau/packages/core/src/Configure.ts:21](https://github.com/tau-mud/tau/blob/9ec4b58/packages/core/src/Configure.ts#L21)
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/core/src/Configure.ts:17](https://github.com/tau-mud/tau/blob/b8e3567/packages/core/src/Configure.ts#L17)
+[taumud/tau/packages/core/src/Configure.ts:17](https://github.com/tau-mud/tau/blob/9ec4b58/packages/core/src/Configure.ts#L17)
 
 ___
 
@@ -49,4 +49,4 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/core/src/Configure.ts:19](https://github.com/tau-mud/tau/blob/b8e3567/packages/core/src/Configure.ts#L19)
+[taumud/tau/packages/core/src/Configure.ts:19](https://github.com/tau-mud/tau/blob/9ec4b58/packages/core/src/Configure.ts#L19)

@@ -126,7 +126,7 @@ Moleculer.Service.dependencies
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/CommandSets.ts:20](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/CommandSets.ts#L20)
+[taumud/tau/packages/world/src/services/CommandSets.ts:20](https://github.com/tau-mud/tau/blob/9ec4b58/packages/world/src/services/CommandSets.ts#L20)
 
 ___
 
@@ -182,7 +182,7 @@ Moleculer.Service.name
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/CommandSets.ts:19](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/CommandSets.ts#L19)
+[taumud/tau/packages/world/src/services/CommandSets.ts:19](https://github.com/tau-mud/tau/blob/9ec4b58/packages/world/src/services/CommandSets.ts#L19)
 
 ___
 
@@ -312,7 +312,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/CommandSets.ts:42](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/CommandSets.ts#L42)
+[taumud/tau/packages/world/src/services/CommandSets.ts:42](https://github.com/tau-mud/tau/blob/9ec4b58/packages/world/src/services/CommandSets.ts#L42)
 
 ___
 
@@ -350,7 +350,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/CommandSets.ts:25](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/CommandSets.ts#L25)
+[taumud/tau/packages/world/src/services/CommandSets.ts:25](https://github.com/tau-mud/tau/blob/9ec4b58/packages/world/src/services/CommandSets.ts#L25)
 
 ___
 

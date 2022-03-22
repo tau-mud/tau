@@ -136,7 +136,7 @@ Moleculer.Service.dependencies
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Manager.ts:18](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Manager.ts#L18)
+[taumud/tau/packages/world/src/services/Sessions/Manager.ts:18](https://github.com/tau-mud/tau/blob/9ec4b58/packages/world/src/services/Sessions/Manager.ts#L18)
 
 ___
 
@@ -192,7 +192,7 @@ Moleculer.Service.name
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Manager.ts:19](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Manager.ts#L19)
+[taumud/tau/packages/world/src/services/Sessions/Manager.ts:19](https://github.com/tau-mud/tau/blob/9ec4b58/packages/world/src/services/Sessions/Manager.ts#L19)
 
 ___
 
@@ -322,7 +322,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Manager.ts:46](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Manager.ts#L46)
+[taumud/tau/packages/world/src/services/Sessions/Manager.ts:46](https://github.com/tau-mud/tau/blob/9ec4b58/packages/world/src/services/Sessions/Manager.ts#L46)
 
 ___
 
@@ -360,7 +360,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Manager.ts:32](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Manager.ts#L32)
+[taumud/tau/packages/world/src/services/Sessions/Manager.ts:32](https://github.com/tau-mud/tau/blob/9ec4b58/packages/world/src/services/Sessions/Manager.ts#L32)
 
 ___
 
@@ -380,7 +380,7 @@ ___
 
 #### Defined in
 
-[taumud/tau/packages/world/src/services/Sessions/Manager.ts:24](https://github.com/tau-mud/tau/blob/b8e3567/packages/world/src/services/Sessions/Manager.ts#L24)
+[taumud/tau/packages/world/src/services/Sessions/Manager.ts:24](https://github.com/tau-mud/tau/blob/9ec4b58/packages/world/src/services/Sessions/Manager.ts#L24)
 
 ___
 

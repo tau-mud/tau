@@ -35,9 +35,9 @@
     "@tau/accounts": "^0.0.0",
     "@tau/characters": "^0.0.0",
     "@tau/core": "^0.0.0",
+    "@tau/muon": "^0.0.0",
     "@tau/portal": "^0.0.0",
     "@tau/world": "^0.0.0",
-    "@tau/muon": "^0.0.0",
     "@types/jest": "^27.0.2",
     "jest": "^27.3.1",
     "moleculer": "^0.14.18",
@@ -54,6 +54,7 @@
     "jest": "^27.3.1",
     "ts-jest": "^27.0.7",
     "ts-node": "^10.4.0",
+    "typed-moleculer": "^1.0.5",
     "typedoc": "^0.22.13",
     "typescript": "^4.4.4"
   }

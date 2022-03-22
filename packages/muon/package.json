@@ -30,7 +30,8 @@
     "url": "https://github.com/tau-mud/tau/issues"
   },
   "devDependencies": {
-    "@types/yargs": "^17.0.9"
+    "@types/yargs": "^17.0.9",
+    "typed-moleculer": "^1.0.5"
   },
   "dependencies": {
     "@tau/core": "^0.0.0",

@@ -27,7 +27,7 @@ export interface IGetValueParams {
  *  `tau.config`
  *
  */
-export class ConfigService extends Moleculer.Service {
+export class Config extends Moleculer.Service {
   name = "tau.config";
 
   started() {

@@ -5,11 +5,13 @@ import { MotdTemplate } from "./templates";
 import { IWorldConfiguration } from "./Configuration";
 
 // Services
-import { Entities, Bootstrapper } from "./services";
+import { Entities, Bootstrapper } from "./Services";
 
 // Systems
-import { Locations } from "./systems";
-import { Commands } from "./systems";
+import { Locations } from "./Systems";
+import { Commands } from "./Systems";
+
+// Controllers
 import { GameController } from "./controllers/GameController";
 
 /**
@@ -25,13 +27,11 @@ export function WorldPlugin(_config: IWorldConfiguration): IPlugin {
         // services
         // Sessions: Sessions.Manager,
         Entities: Entities.Registry,
-        // CommandSets: CommandSets.Registry,
         // Bootstrapper,
 
         // systems
         Locations: Locations.System,
         Commands: Commands.System,
-        // RoomSystem,
       },
       controllers: {
         start: StartController,

@@ -1,8 +1,22 @@
-import Moleculer, { Context } from "moleculer";
+import { Context } from "moleculer";
+import { includes } from "lodash";
 import { Action } from "typed-moleculer";
 
-import { System } from "../System";
+import { System as Base } from "../System";
+import { IAttributeAddedEvent, IAttributeUpdatedEvent } from "../services/Entities";
 import { IEntity } from "../IEntity";
+
+class EntityAlreadyInContainerError extends Error {
+  constructor(entity: IEntity, container: IEntity) {
+    super(`Entity ${entity.id} is already in container ${container.id}`);
+  }
+}
+
+class InvalidContainerError extends Error {
+  constructor(entity: IEntity) {
+    super(`Invalid entity: ${JSON.stringify(entity)}, missing container attribute`);
+  }
+}
 
 /**
  * A location entity defines the `location` attribute which should be the `_id` of the
@@ -13,6 +27,13 @@ export interface ILocation extends IEntity {
    * The `_id` of the container which contains the entity.
    */
   location: string;
+}
+
+export interface IContainer extends IEntity {
+  /**
+   * The `_id` of the container which contains the entity.
+   */
+  container: Array<string>;
 }
 
 interface IMoveParams {
@@ -45,43 +66,38 @@ interface IMoveParams {
  * * `from`: _string_ - the location the entity was moved from.
  * * `to`: _string_ - the container to which the entity was moved.
  */
-export class Locations extends Moleculer.Service {
+export class System extends Base {
   readonly name = "tau.locations";
-  readonly mixins = [System];
-  readonly filter = { location: { $exists: true } };
-  readonly dependencies = ["tau.containers"];
+  readonly attributes = ["location", "container"];
 
-  async beforeAdd(entity: ILocation) {
-    return this.broker
-      .call("tau.entities.find", { query: { _id: entity.location } })
-      .then(([location]) => {
-        if (!location) {
-          throw new Error("the parent location was not found");
-        } else if (!location.container) {
-          throw new Error("the parent location was not a container");
+  @Action()
+  mine(ctx: Context<ILocation>) {
+    ctx.call("tau.entities.fetch", { _id: ctx.params.location });
+  }
+
+  locationAdded(ctx: Context<IAttributeAddedEvent>) {
+    const entity = ctx.params.entity as ILocation;
+
+    ctx
+      .call("tau.entities.fetch", { _id: entity.location })
+      .then((container: IContainer) => {
+        if (!container.container) {
+          throw new InvalidContainerError(container);
+        } else if (includes(container.container, entity._id)) {
+          throw new EntityAlreadyInContainerError(entity, container);
         }
+
+        return container;
+      })
+      .then((container) => {
+        ctx.call("tau.entities.update", {
+          ...container,
+          container: [...container.container, entity._id],
+        });
       });
   }
 
-  afterAdd(entity: ILocation) {
-    return this.broker.call("tau.containers.addToContainer", {
-      container: entity.location,
-      entity: entity,
-    });
-  }
-
-  @Action()
-  move(ctx: Context<IMoveParams>) {
-    const entity = ctx.params.entity;
-    return this.updateEntity(ctx, {
-      ...entity,
-      location: ctx.params.to,
-    }).then(() =>
-      ctx.emit(`tau.locations.entityMoved.${entity._id}`, {
-        entity,
-        from: entity.location,
-        to: ctx.params.to,
-      })
-    );
+  containerUpdated(ctx: Context<IAttributeUpdatedEvent>) {
+    console.log("container updated", ctx.params);
   }
 }

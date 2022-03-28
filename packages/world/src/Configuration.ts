@@ -13,12 +13,17 @@ interface ITemplateMap {
   [key: string]: ITemplate;
 }
 
+interface IEntityIndex {
+  [key: string]: any;
+}
+
 export interface IWorldOptions {
   services: IServiceMap;
   commandSets: Array<Argv>;
   controllers?: IControllerMap;
   templates?: ITemplateMap;
   loadDataSources: Array<string>;
+  entityIndex: IEntityIndex;
 }
 
 export interface IWorldConfiguration extends IConfiguration {

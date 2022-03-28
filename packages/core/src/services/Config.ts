@@ -1,9 +1,7 @@
 import Moleculer, { Context } from "moleculer";
-import { Action } from "typed-moleculer";
+import { Action, Service } from "typed-moleculer";
 
 import { get } from "lodash";
-
-import { ITauBrokerOptions } from "../Configure";
 
 /**
  * Parameters for the `tau.config.getValue` action.
@@ -27,25 +25,18 @@ export interface IGetValueParams {
  *  `tau.config`
  *
  */
-export class Config extends Moleculer.Service {
-  name = "tau.config";
-
-  started() {
-    return Promise.resolve();
-  }
-
+@Service({
+  name: "tau.config",
+})
+export class Registry extends Moleculer.Service {
   /**
-   * Get a value from the configuration.
+   * Get a value from the configuration using the provided key. Key can be a dot separated path.
    *
    * ### Moleculer Action
    * `tau.config.getValue`
    */
   @Action()
   async getValue(ctx: Context<IGetValueParams>) {
-    return ctx
-      .call("$node.options")
-      .then((options: ITauBrokerOptions) =>
-        get(options.tau, ctx.params.key, ctx.params.defaultValue)
-      );
+    return get(this.broker.runner.config.tau, ctx.params.key, ctx.params.defaultValue);
   }
 }

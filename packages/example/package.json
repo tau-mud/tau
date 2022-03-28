@@ -32,6 +32,7 @@
     "url": "https://github.com/tau-mud/tau/issues"
   },
   "dependencies": {
+    "@node-redis/search": "^1.0.3",
     "@tau/accounts": "^0.0.0",
     "@tau/characters": "^0.0.0",
     "@tau/core": "^0.0.0",

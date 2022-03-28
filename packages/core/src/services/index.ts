@@ -1,1 +1,1 @@
-export * from "./Config";
+export * as Config from "./Config";

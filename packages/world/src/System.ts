@@ -1,4 +1,9 @@
-import { Context, ServiceSchema } from "moleculer";
+import { Service, ServiceSchema, Context } from "moleculer";
+import { IEntity } from "./IEntity";
+
+export interface IEntityDiff {
+  [key: string]: any;
+}
 
 /**
  * This is a [Moleculer mixin](https://moleculer.services/docs/0.14/services.html#Mixins) that
@@ -16,87 +21,16 @@ import { Context, ServiceSchema } from "moleculer";
  * Callbacks are the method by which a system processes an entity. Developers can override the
  * callbacks to implement behaviours when the entity is created, updated, or destroyed.
  **/
-export const System: ServiceSchema = {
-  name: "",
-  dependencies: ["tau.entities"],
+export abstract class System extends Service {
+  preParse(schema: ServiceSchema) {
+    const events = schema.events || {};
 
-  /**
-   * @private
-   */
-  created() {
-    this.filter = this.schema.filter;
-    this.entities = {};
-  },
+    schema.attributes.forEach((attribute: string) => {
+      events[`tau.attributes.${attribute}.added`] = schema[`${attribute}Added`] || (() => {});
+      events[`tau.attributes.${attribute}.updated`] = schema[`${attribute}Updated`] || (() => {});
+      events[`tau.attributes.${attribute}.removed`] = schema[`${attribute}Removed`] || (() => {});
+    });
 
-  events: {
-    "tau.entities.created"(ctx) {
-      return this.broker
-        .call("tau.entities.find", {
-          query: { _id: ctx.params._id, ...this.filter },
-        })
-        .then((entities) => entities.length > 0)
-        .then((hasEntities) => {
-          if (hasEntities) {
-            this.register(ctx.params);
-          }
-        });
-    },
-    "tau.entities.updated"(ctx) {
-      return this.broker
-        .call("tau.entities.find", {
-          query: { _id: ctx.params._id, ...this.filter },
-        })
-        .then((entities) => entities.length > 0)
-        .then((hasEntities) => {
-          if (hasEntities) {
-            this.updated(ctx.params);
-          }
-        });
-    },
-    isRegistered(ctx) {
-      return this.entities[ctx.params._id] !== undefined;
-    },
-  },
-  actions: {
-    getEntity(ctx) {
-      return this.entities[ctx.params._id];
-    },
-  },
-  methods: {
-    beforeRegister(_entity) {
-      return Promise.resolve();
-    },
-    register(entity) {
-      return this.beforeRegister(entity)
-        .then(() => {
-          this.logger.debug(`registering entity '${entity._id}'`);
-          this.entities[entity._id] = entity;
-        })
-        .then(() => this.afterRegister(entity))
-        .catch((err) => {
-          this.logger.error(`error registering entity '${entity._id}'`, err);
-        });
-    },
-    afterRegister(_entity) {
-      return Promise.resolve();
-    },
-    updated(entity) {
-      return Promise.resolve();
-    },
-    updateEntity(ctx, entity) {
-      return ctx.call("tau.entities.update", entity);
-    },
-    findEntity(ctx, entityId) {
-      return ctx
-        .call("tau.entities.find", {
-          query: { _id: entityId },
-        })
-        .then(([entity]) => {
-          if (!entity) {
-            throw new Error(`Entity not found with id '${entityId}'`);
-          }
-          return entity;
-        });
-    },
-  },
-};
+    return { ...schema, events };
+  }
+}

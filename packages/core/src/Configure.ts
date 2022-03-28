@@ -1,6 +1,12 @@
-import { BrokerOptions, ServiceSchema, ServiceRegistry } from "moleculer";
+import Moleculer, {
+  BrokerOptions,
+  ServiceSchema,
+  ServiceRegistry,
+  ServiceSettingSchema,
+} from "moleculer";
 import { defaultsDeep, flattenDeep, get, values } from "lodash";
 
+import { Service } from "./Service";
 import { TPlugin } from "./Plugin";
 
 // Redis configuration
@@ -53,14 +59,6 @@ export function Configure(processName: string, config: IConfiguration): ITauBrok
     },
     serializer: "JSON",
     requestTimeout: 10 * 1000,
-    retryPolicy: {
-      enabled: false,
-      retries: 5,
-      delay: 100,
-      maxDelay: 1000,
-      factor: 2,
-      check: (err) => err && !!err.retryable,
-    },
     maxCallLevel: 100,
     heartbeatInterval: 10,
     heartbeatTimeout: 30,
@@ -69,18 +67,11 @@ export function Configure(processName: string, config: IConfiguration): ITauBrok
       enabled: false,
       shutdownTimeout: 5000,
     },
+    ServiceFactory: <typeof Moleculer.Service>Service,
     disableBalancer: false,
     registry: {
       strategy: "RoundRobin",
       preferLocal: true,
-    },
-    circuitBreaker: {
-      enabled: false,
-      threshold: 0.5,
-      minRequestCount: 20,
-      windowTime: 60,
-      halfOpenTime: 10 * 1000,
-      check: (err) => err && err.code >= 500,
     },
     bulkhead: {
       enabled: false,
@@ -125,6 +116,7 @@ export function Configure(processName: string, config: IConfiguration): ITauBrok
         if (typeof service === "function") {
           service = new service(broker);
         }
+
         broker.logger.info("starting service", service.name);
         broker.createService(service);
       });
@@ -141,9 +133,6 @@ function loadPlugins(processName: string, config: IConfiguration) {
     plugins.map((plugin) => values(plugin.services || {})),
     plugins.map((plugin) => values(get(plugin, `${processName}.services`, {}))),
   ]);
-
-  console.log(services);
-  console.log({ ...config, services });
 
   return { ...config, services };
 }

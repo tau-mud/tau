@@ -1,5 +1,6 @@
 import { defaultsDeep } from "lodash";
 import { BrokerOptions } from "moleculer";
+import { SchemaFieldTypes } from "@node-redis/search";
 
 import { Configure } from "@tau/core";
 

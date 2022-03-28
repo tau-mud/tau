@@ -17,7 +17,9 @@ services:
     ports:
       - "4222:4222"
   redis:
-    image: redis:alpine
+    image: redislabs/redismod:latest
+    ports:
+      - "6379:6379"
     networks:
       - internal
 

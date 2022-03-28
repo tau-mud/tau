@@ -5,6 +5,6 @@ import { Config } from "./services";
 export function CorePlugin(_config: IConfiguration): IPlugin {
   return {
     name: "core",
-    services: { Config },
+    services: { Config: Config.Registry },
   };
 }
